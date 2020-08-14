@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>设计模式之策略模式（Strategy）</title>
+    <link href="/2020/08/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <url>/2020/08/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
+    
+    <content type="html"><![CDATA[<h2 id="设计模式之策略模式（Strategy）"><a href="#设计模式之策略模式（Strategy）" class="headerlink" title="设计模式之策略模式（Strategy）"></a>设计模式之策略模式（Strategy）</h2><p>​    之前的那个博客不想用了,搭建在自己的服务器上面,数据库什么的还都要维护,比较麻烦,然后用github pages 和 jekyll 搭建了一个博客,大道至简,看起来清爽多了.废话不多说,好好写文章了.准备把所有的设计模式写完.因为最近不忙.啊呼呼呼呼<del>~</del></p><h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a><strong>策略模式</strong></h3><p><strong>定义</strong></p><p>​    定义了算法族，分别封装起来，让他们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。</p><p><strong>要点</strong></p><ul><li>知道 OO 基础，并不足以让你设计出良好的 OO 系统。</li><li>良好的 OO 设计必须具备可复用、可扩充、可维护三个特性。</li><li>模式可以让我们建造出具有良好 OO 设计质量的系统。</li><li>模式被认为是历经验证的 OO 设计经验。</li><li>模式不是代码，而是针对设计问题的通用解决方案。你可把它们应用到特定的应用中。</li><li>模式不是被发明，而是被发现。</li><li>大多数的模式和原则，都着眼于软件变化的主题。</li><li>大多数的模式都允许系统局部改变独立于其他部分。</li><li>我们常把系统中会变化的部分抽出来封装。</li><li>模式让开发人员之间有共享的语言，能够最大化沟通的价值。</li></ul><p><strong>设计原则</strong></p><ul><li>找出应用中可能需要的变化之处,把他们独立出来，不要和那些不要变化的代码混合在一起。</li><li>针对接口编程，而不是针对实现编程</li><li>多用组合，少用继承</li></ul><h3 id="Class-Diagram"><a href="#Class-Diagram" class="headerlink" title="Class Diagram"></a>Class Diagram</h3><ul><li>Strategy 接口定义了一个算法族，它们都实现了 behavior() 方法。</li><li>Context 是使用到该算法族的类，其中的 doSomething() 方法会调用 behavior()，setStrategy(Strategy) 方法可以动态地改变 strategy 对象，也就是说能动态地改变 Context 所使用的算法。</li></ul><p><img src="/images/strategy.png"></p><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">QuackBehavior</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">quack</span><span class="hljs-params">()</span></span>;&#125;</code></pre><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Quack</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">QuackBehavior</span> </span>&#123;    <span class="hljs-meta">@Override</span>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">quack</span><span class="hljs-params">()</span> </span>&#123;        System.out.println(<span class="hljs-string">&quot;Quack&quot;</span>);    &#125;&#125;</code></pre><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Squeak</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">QuackBehavior</span> </span>&#123;    <span class="hljs-meta">@Override</span>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">quack</span><span class="hljs-params">()</span> </span>&#123;        System.out.println(<span class="hljs-string">&quot;Squeak&quot;</span>);    &#125;&#125;</code></pre><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Duck</span> </span>&#123;    <span class="hljs-keyword">protected</span> QuackBehavior quackBehavior;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">performQuack</span><span class="hljs-params">()</span></span>&#123;        quackBehavior.quack();    &#125;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setQuackBehavior</span><span class="hljs-params">(QuackBehavior quackBehavior)</span> </span>&#123;        <span class="hljs-keyword">this</span>.quackBehavior = quackBehavior;    &#125;&#125;</code></pre><p>完整代码已经上传至<a href="https://github.com/iMLe0n/DesignPatterns/tree/master/src/strategy">github</a></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>设计模式</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2020/08/12/hello-world/"/>
     <url>/2020/08/12/hello-world/</url>
