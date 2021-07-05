@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Leon Charles">
+  <meta name="keywords" content="">
+  <title>iMLe0n</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>iMLe0n</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/05/29/2019-05-11-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%EF%BC%88Facade%EF%BC%89/">设计模式之外观模式（Facade）</a>
+
+      <a href="/2020/05/29/2019-05-11-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%EF%BC%88Facade%EF%BC%89/" class="index-excerpt">
+        
+        
+          
+        
+        <div>设计模式之外观模式（Facade）​                一定要逼迫自己跳出舒适圈
+定义提供了一个统一的接口，用来访问子系统中的一群接口。外观定义了一个高层接口，让子系统更容易使用。
+要点
+当需要简化并统一一个很大的接口或者一群复杂的接口时，使用外观。
+外观将客户从一个复杂的子系统中解耦。
+实现一个外观，需要将子系统组合进外观中，然后将工作委托给子系统执行。
+你可以为一个子系统实现一个以</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-05-29
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/05/29/2019-05-07-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%88Singleton%EF%BC%89/">设计模式之单例模式（Singleton）</a>
+
+      <a href="/2020/05/29/2019-05-07-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%88Singleton%EF%BC%89/" class="index-excerpt">
+        
+        
+          
+        
+        <div>设计模式之单例模式（Singleton）​    只要你每天都在学习，那么你就胜过百分之九十的人了。    
+定义​    确保一个类只有一个实例，并提供一个全局访问点
+要点
+单例模式确保程序中一个类最多只有一个实例。
+单例模式也提供访问这个实例的全局点。
+在 JAVA 中实现单例模式需要私有的构造器，一个静态方法和静态变量。
+确定在性能和资源上的限制，然后小心地选择适当的方案来实现单例，以解决多</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-05-29
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/05/29/2019-04-26-%E5%9C%A8CLI%E4%B8%AD%E9%AB%98%E6%95%88%E7%A7%BB%E5%8A%A8/">在CLI中高效移动</a>
+
+      <a href="/2020/05/29/2019-04-26-%E5%9C%A8CLI%E4%B8%AD%E9%AB%98%E6%95%88%E7%A7%BB%E5%8A%A8/" class="index-excerpt">
+        
+        
+          
+        
+        <div>我厌倦了在命令行中移动时敲击箭头键，但是我一直忘记了能够帮助我更有效地移动的键盘缩略图，所以这是一个简单的flashcard格式图表供将来参考！
+
+</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-05-29
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/">命令行</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/05/29/2019-04-26-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%EF%BC%88Strategy%EF%BC%89/">设计模式之策略模式（Strategy）</a>
+
+      <a href="/2020/05/29/2019-04-26-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%EF%BC%88Strategy%EF%BC%89/" class="index-excerpt">
+        
+        
+          
+        
+        <div>设计模式之策略模式（Strategy）​    之前的那个博客不想用了,搭建在自己的服务器上面,数据库什么的还都要维护,比较麻烦,然后用github pages 和 jekyll 搭建了一个博客,大道至简,看起来清爽多了.废话不多说,好好写文章了.准备把所有的设计模式写完.因为最近不忙.啊呼呼呼呼~
+策略模式定义
+​    定义了算法族，分别封装起来，让他们之间可以互相替换，此模式让算法的变化独立</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-05-29
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/05/29/2019-04-28-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88Decorator%EF%BC%89/">设计模式之装饰者模式（Decorator）</a>
+
+      <a href="/2020/05/29/2019-04-28-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88Decorator%EF%BC%89/" class="index-excerpt">
+        
+        
+          
+        
+        <div>设计模式之装饰者模式（Decorator）​    每日鸡汤，今天的金句还是 自助者天助，今天也要加油哦！
+
+
+装饰者模式定义
+​    动态的将责任附加到对象上。若要扩展功能，装饰者提供了比继承更有弹性的替代方案。（为对象动态的添加功能）
+要点
+
+继承属于扩展形式之一，但不见得是达到弹性设计的最佳方式。
+在我们的设计中，应该允许行为可以被扩展，而无须修改现有的代码。
+组合和委托可用于在运行时动态</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-05-29
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/05/29/2019-04-27-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88Observe%EF%BC%89/">设计模式之观察者模式（Observe）</a>
+
+      <a href="/2020/05/29/2019-04-27-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88Observe%EF%BC%89/" class="index-excerpt">
+        
+        
+          
+        
+        <div>设计模式之观察者模式（Observe）​    每天都要坚持学习哦，不进则退，自助者天助，这句话是哥哥嘴里说的，我觉得很有道理。
+观察者模式定义
+​    定义了对象之间的一对多依赖，这样一来，当一个对象改变状态时，他的所有依赖者都会受到通知并自动更新。
+
+要点
+
+观察者模式定义了对象之间一对多的关系
+主题（也就是可观察者）用一个共同的接口来更新观察者
+观察者和可观察者之间用松耦合方式结合，可观察</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-05-29
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <!-- <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> -->
+	  <span>Copyright © 2020</span>
+      <!--<i class="iconfont icon-love"></i>-->
+      <!--<a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>-->
+		
+	  <a href="http://www.cltc.club" target="_blank" rel="nofollow noopener"><span>CLTC.CLUB</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">浙ICP备18021007号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "CLTC CLUB 吹拉弹唱俱乐部&nbsp;",
+      ],
+      cursorChar: "~",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  <script>(function (i, s, o, g, r, a, m) {
+      i['DaoVoiceObject'] = r;
+      i[r] = i[r] ||
+        function () {
+          (i[r].q = i[r].q || []).push(arguments);
+        };
+      i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      a.charset = 'utf-8';
+      m.parentNode.insertBefore(a, m);
+    })(window, document, 'script', ('https:' === document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/08ff2aaf.js", 'daovoice');
+    daovoice('init', {
+      app_id: "08ff2aaf",
+    });
+    daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/node_modules/hexo-helper-live2dlib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"node_modules/hexo-helper-live2d","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"jsonPath":"/node_modules/hexo-helper-live2dassets/tororo.model.json"},"log":false});</script></body>
+</html>

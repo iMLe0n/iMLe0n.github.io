@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Leon Charles">
+  <meta name="keywords" content="">
+  <title>设计模式之迭代器模式（Iterator） - iMLe0n</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>iMLe0n</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-05-29 17:20">
+      2020年5月29日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      89
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h2 id="设计模式之迭代器模式（Iterator）"><a href="#设计模式之迭代器模式（Iterator）" class="headerlink" title="设计模式之迭代器模式（Iterator）"></a>设计模式之迭代器模式（Iterator）</h2><p><strong>时光如流水，一去不复返</strong></p>
+<h3 id="聚集（集合）的概念"><a href="#聚集（集合）的概念" class="headerlink" title="聚集（集合）的概念"></a>聚集（集合）的概念</h3><p>如果能把多个普通类的对象聚在一起形成一个总体，这个总体就被称之为聚集(Aggregate)，举例子：</p>
+<p>1、在任何编程语言中：数组都是最基本的聚集，在Java中，数组也是其他的 JAVA 聚集对象的设计基础。</p>
+<p>2、在Java里，JAVA聚集对象都是实现了 java.util.Collection 接口的对象，是 JAVA 对聚集概念的直接支持。从 JDK 1.2 开始，JAVA 提供了多种现成的聚集 API，包括 Vector、ArrayList、HashSet、HashMap、Hashtable、ConcurrentHashMap 等。</p>
+<h3 id="自定义容器的封闭需求"><a href="#自定义容器的封闭需求" class="headerlink" title="自定义容器的封闭需求"></a>自定义容器的封闭需求</h3><p>假如因业务需要，RD 定义了专属的数据元素的聚集，还要把它提供给客户端，让其调用（不特别强调，也包括其他依赖服务）。但是有时候为了安全，RD 不想让客户端看到聚集的内部实现，只是能让她们访问就可以了，比如遍历等操作。还有的时候，客户端不需要了解具体实现，能否让客户端跳开复杂的数据结构？因为调用者们不需要了解实现方式，只要能开箱即用即可。</p>
+<p>为了解决这个问题，那么就需要有一种策略能让客户端遍历这个聚集体的时候，无法窥破RD存储对象的方式，无需了解内部的复杂数据结构。</p>
+<h3 id="迭代器的引出——茶餐厅和煎饼铺子合并的经典案例"><a href="#迭代器的引出——茶餐厅和煎饼铺子合并的经典案例" class="headerlink" title="迭代器的引出——茶餐厅和煎饼铺子合并的经典案例"></a>迭代器的引出——茶餐厅和煎饼铺子合并的经典案例</h3><p>有两个遗留的点餐系统，包括一套餐厅点餐系统——专门提供正餐，和一个煎饼铺子点餐系统（不要纠结为啥煎饼摊也有点餐系统。。。）——专门提供早餐（除了早餐，其他时间不开放）。</p>
+<h3 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h3><p>餐厅里有很多卖饭的窗口，它们的业务是一块单独的实现，隔壁煎饼铺的业务，也是一块单独的实现。现在有个老板想把它们收购并合并，让客户能在一个地方，一个时间段内，同时吃煎饼和餐厅的各种菜。目前餐厅内有至少两家餐馆都统一实现了 MenuItem 类——菜单子系统的菜单类。</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>但是煎饼的菜单系统用的 ArrayList 记录菜单，而餐厅的 RD 用的是数组实现了菜单系统，双方的RD，都不愿意花费时间修改自己的实现。毕竟有很多其他服务依赖了菜单子系统，如下 MenuItem 代码：</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午8:41</span>
+<span class="hljs-comment"> * 餐厅的菜单都是午餐项目，煎饼的菜单，都是早餐项目，但</span>
+<span class="hljs-comment"> * 它们都属于菜单，即: 都有菜品名称，描述</span>
+<span class="hljs-comment"> * 故设计这样一个类作为菜单项目类</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MenuItem</span> </span>&#123;
+    String name;
+    String description;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MenuItem</span><span class="hljs-params">(String name,</span></span>
+<span class="hljs-function"><span class="hljs-params">                    String description)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.description = description;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> description;
+    &#125;
+&#125;</code></pre>
+
+<p>不同的餐厅使用了这个 MenuItem 类</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午8:53</span>
+<span class="hljs-comment"> * 煎饼窗口的菜单</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PancakeHouseMenu</span> </span>&#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * menuItems 使用 ArrayList 存储菜单的项目，动态数组，使其很容易扩大菜单规模</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">private</span> List&lt;MenuItem&gt; menuItems;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 在构造菜单的时候，把菜单加入到 ArrayList menuItems</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PancakeHouseMenu</span><span class="hljs-params">()</span> </span>&#123;
+        menuItems = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        addItem(<span class="hljs-string">&quot;K&amp;B&#x27;s Pancake Breakfast&quot;</span>,
+                <span class="hljs-string">&quot;Pancakes with scrambled eggs, and toast&quot;</span>);
+
+        addItem(<span class="hljs-string">&quot;Regular Pancake Breakfast&quot;</span>,
+                <span class="hljs-string">&quot;Pancakes with fried eggs, sausage&quot;</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addItem</span><span class="hljs-params">(String name, String description)</span> </span>&#123;
+        MenuItem menuItem = <span class="hljs-keyword">new</span> MenuItem(name, description);
+        menuItems.add(menuItem);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;MenuItem&gt; <span class="hljs-title">getMenuItems</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> menuItems;
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午8:57</span>
+<span class="hljs-comment"> * 餐厅的菜单</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DinerMenu</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAX_ITEMS = <span class="hljs-number">6</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> numberOfItems = <span class="hljs-number">0</span>;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 使用了真正的数组实现菜单项的存储</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">private</span> MenuItem[] menuItems;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DinerMenu</span><span class="hljs-params">()</span> </span>&#123;
+        menuItems = <span class="hljs-keyword">new</span> MenuItem[MAX_ITEMS];
+        addItem(<span class="hljs-string">&quot;Vegetarian BLT&quot;</span>, <span class="hljs-string">&quot;(Fakin&#x27;) Bacon with lettuce &amp; tomato on whole wheat&quot;</span>);
+        addItem(<span class="hljs-string">&quot;BLT&quot;</span>, <span class="hljs-string">&quot;Bacon with lettuce &amp; tomato on whole wheat&quot;</span>);
+        addItem(<span class="hljs-string">&quot;Soup of the day&quot;</span>, <span class="hljs-string">&quot;Soup of the day, with a side of potato salad&quot;</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addItem</span><span class="hljs-params">(String name, String description)</span> </span>&#123;
+        MenuItem menuItem = <span class="hljs-keyword">new</span> MenuItem(name, description);
+        <span class="hljs-keyword">if</span> (numberOfItems &gt;= MAX_ITEMS) &#123;
+            System.err.println(<span class="hljs-string">&quot;Sorry, menu is full!  Can&#x27;t add item to menu&quot;</span>);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            menuItems[numberOfItems] = menuItem;
+            numberOfItems = numberOfItems + <span class="hljs-number">1</span>;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">public</span> MenuItem[] getMenuItems() &#123;
+        <span class="hljs-keyword">return</span> menuItems;
+    &#125;
+&#125;</code></pre>
+
+<p>两种不同的菜单表现方式，会给客户端调用带来很多问题，假设客户端是服务员类——Waitress，下面是客户端的业务：</p>
+<ul>
+<li>打印出菜单上的每一项：打印每份菜单上的所有项，必须调用 PancakeHouseMenu 和 DinerMenu 的 getMenuItem 方法，来取得它们各自的菜单项，但是两者返回类型是不一样的</li>
+<li>只打印早餐项（PancakeHouseMenu 的菜单）或者只打印午餐项（DinerMenu 的菜单）<ul>
+<li>想要打印 PancakeHouseMenu 的项，我们用循环将早餐 ArrayList 内的项列出来</li>
+<li>想要打印 DinerMenu 的项目，我们用循环将数组内的项一一列出来</li>
+</ul>
+</li>
+</ul>
+<p>实现 Waitress 的其他方法，做法都和上面的方法类似，发现 Waitress 处理两个菜单时，总是需要写两个形式相似的循环，去遍历这些菜单，而且一旦外部菜单的数据结构变了，客户端也得跟着修改。</p>
+<p>再有，如果还有第三家餐厅合并，而且坑爹的是，它以完全不同的实现方式实现了菜单……那怎么办？此时难道还继续写第三个循环么……</p>
+<p>以后，这样甚至能发展到 N 个不同形式的循环……</p>
+<p>这显然是非常不好的设计，直接导致后期系统的大量垃圾代码和日益艰巨的维护任务。</p>
+<h3 id="为什么出现这种结局？"><a href="#为什么出现这种结局？" class="headerlink" title="为什么出现这种结局？"></a>为什么出现这种结局？</h3><table>
+<thead>
+<tr>
+<th align="left">封装特性</th>
+<th align="left">面向接口编程</th>
+<th align="left">代码冗余</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Waitress （也就是客户端）竟然能非常清晰的，而且是必须清晰的熟悉服务端的实现，这是很不科学的</td>
+<td align="left">PancakeHouseMenu 和 DinerMenu 都没有面向接口编程，而直接实现了具体业务，导致扩展困难</td>
+<td align="left">DinerMenu和PancakeHouseMenu都有很大重复代码，没有抽象共享</td>
+</tr>
+</tbody></table>
+<p>那么可以解决么？</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>1、Waitress 要遍历早餐项，需要使用 ArrayList 的 size() 和 get() 方法</p>
+<p>2、Waitress 遍历午餐项，需要使用数组的 length 字段和中括号</p>
+<p>现在创建一个新的对象，将它称为迭代器（Iterator），利用它来封装“遍历集合内的每个对象的过程”，下面对其抽象、封装。</p>
+<h3 id="原则：只封装变化的部分"><a href="#原则：只封装变化的部分" class="headerlink" title="原则：只封装变化的部分"></a>原则：只封装变化的部分</h3><p>案例中变化的部分：因为不同的集合实现，导致的不同的遍历方式。将其封装即可，其实，这正是迭代器模式的应用。迭代器 Iterator，是面向接口编程，故它依赖于一个称为迭代器的接口：</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午9:04</span>
+<span class="hljs-comment"> * 迭代器的接口，一旦有了这个接口，就可以为给种对象集合实现迭代器：数组、列表、散列表等等</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Iterator</span> </span>&#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 聚集中，是否还有元素</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 返回聚集中的下一个元素</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function">Object <span class="hljs-title">next</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+<p>让餐厅实现迭代器接口 —— Iterator，打造一个餐厅菜单迭代器——DinerMenuIterator</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午9:05</span>
+<span class="hljs-comment"> * 餐厅的迭代器</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DinerMenuIterator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Iterator</span> </span>&#123;
+    <span class="hljs-keyword">private</span> MenuItem[] items;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> position = <span class="hljs-number">0</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DinerMenuIterator</span><span class="hljs-params">(MenuItem[] items)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.items = items;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> position &lt; items.length &amp;&amp; items[position] != <span class="hljs-keyword">null</span>;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>&#123;
+        MenuItem menuItem = items[position];
+        position = position + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">return</span> menuItem;
+    &#125;
+&#125;</code></pre>
+
+<p>改造具体餐厅的菜单旧实现，把之前的如下代码删掉，因为它会暴露餐厅菜单的内部数据结构 menuItems</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> MenuItem[] getMenuItems() &#123;
+    <span class="hljs-keyword">return</span> menuItems;
+&#125;</code></pre>
+
+<p>下面是改造之后的餐厅菜单实现，PancakeHouseMenu 实现类似。</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午8:57</span>
+<span class="hljs-comment"> * 餐厅的菜单</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DinerMenu</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAX_ITEMS = <span class="hljs-number">6</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> numberOfItems = <span class="hljs-number">0</span>;
+    <span class="hljs-comment">//使用了真正的数组实现菜单项的存储</span>
+    <span class="hljs-keyword">private</span> MenuItem[] menuItems;
+
+    <span class="hljs-comment">//实现方式不变</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DinerMenu</span><span class="hljs-params">()</span> </span>&#123;
+        menuItems = <span class="hljs-keyword">new</span> MenuItem[MAX_ITEMS];
+        addItem(<span class="hljs-string">&quot;Vegetarian BLT&quot;</span>, <span class="hljs-string">&quot;(Fakin&#x27;) Bacon with lettuce &amp; tomato on whole wheat&quot;</span>);
+        addItem(<span class="hljs-string">&quot;BLT&quot;</span>, <span class="hljs-string">&quot;Bacon with lettuce &amp; tomato on whole wheat&quot;</span>);
+        addItem(<span class="hljs-string">&quot;Soup of the day&quot;</span>, <span class="hljs-string">&quot;Soup of the day, with a side of potato salad&quot;</span>);
+    &#125;
+
+    <span class="hljs-comment">//实现方式不变</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addItem</span><span class="hljs-params">(String name, String description)</span> </span>&#123;
+        MenuItem menuItem = <span class="hljs-keyword">new</span> MenuItem(name, description);
+        <span class="hljs-keyword">if</span> (numberOfItems &gt;= MAX_ITEMS) &#123;
+            System.err.println(<span class="hljs-string">&quot;Sorry, menu is full!  Can&#x27;t add item to menu&quot;</span>);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            menuItems[numberOfItems] = menuItem;
+            numberOfItems = numberOfItems + <span class="hljs-number">1</span>;
+        &#125;
+    &#125;
+
+    <span class="hljs-comment">// 不需要 getMenuItems 方法，因为它会暴露内部实现，返回的直接是菜单的数据结构</span>
+    <span class="hljs-comment">// 这个新方法代替 getMenuItems，createIterator 返回的是迭代器接口</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Iterator <span class="hljs-title">createIterator</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> DinerMenuIterator(menuItems);
+    &#125;
+&#125;</code></pre>
+
+<p>这样写客户端的代码就不会重复两遍，如下，把迭代器的代码整合到 Waitress，改掉之前冗余的循环遍历代码，只需要传入一个迭代器作为遍历方法的参数，把遍历聚集的工作，委托给迭代器实现。既能保护内部实现，也能抽象遍历形式，精简代码。也符合了开闭原则——以后菜单的实现逻辑修改了，客户端也不用修改调用的代码。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Waitress</span> </span>&#123;
+    <span class="hljs-comment">// 服务员依赖的菜单系统</span>
+    <span class="hljs-keyword">private</span> PancakeHouseMenu pancakeHouseMenu;
+    <span class="hljs-keyword">private</span> DinerMenu dinerMenu;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Waitress</span><span class="hljs-params">(PancakeHouseMenu pancakeHouseMenu, DinerMenu dinerMenu)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.pancakeHouseMenu = pancakeHouseMenu;
+        <span class="hljs-keyword">this</span>.dinerMenu = dinerMenu;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printMenu</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-comment">// 把迭代器子类型，传入</span>
+        Iterator pancakeIterator = pancakeHouseMenu.createIterator();
+        Iterator dinerIterator = dinerMenu.createIterator();
+        printMenu(pancakeIterator);
+        printMenu(dinerIterator);
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 接口的用法，向上转型</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printMenu</span><span class="hljs-params">(Iterator iterator)</span></span>&#123;
+        <span class="hljs-comment">// 先判断是否还能继续迭代</span>
+        <span class="hljs-keyword">while</span>(iterator.hasNext())&#123;
+            <span class="hljs-comment">// Iterator 接口里 next 返回的是 Object 对象，故需要强制转换</span>
+            MenuItem menuItem = (MenuItem) iterator.next();
+            System.out.print(menuItem.getName() + <span class="hljs-string">&quot;, &quot;</span>);
+            System.out.println(menuItem.getDescription());
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MenuTestDrive</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        PancakeHouseMenu pancakeHouseMenu = <span class="hljs-keyword">new</span> PancakeHouseMenu();
+        DinerMenu dinerMenu = <span class="hljs-keyword">new</span> DinerMenu();
+        Waitress waitress = <span class="hljs-keyword">new</span> Waitress(pancakeHouseMenu,dinerMenu);
+        waitress.printMenu();
+    &#125;
+&#125;</code></pre>
+
+<h3 id="到底解决了什么问题"><a href="#到底解决了什么问题" class="headerlink" title="到底解决了什么问题"></a>到底解决了什么问题</h3><p>经迭代器模式对菜单系统进行封装，使得各个餐厅的菜单系统能维持不变，磨平了实现的差别，减少了重写的工作量。</p>
+<table>
+<thead>
+<tr>
+<th align="left">旧版代码的客户端</th>
+<th align="left">基于迭代器模式封装服务后，重写的客户端</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">遍历：需要多个代码重复度较高的循环来实现，代码冗余度很高，加大无意义的工作量</td>
+<td align="left">只需要增加类，去实现各个菜单系统的迭代器，客户端只需要一个循环就能搞定所有的菜单服务调用</td>
+</tr>
+<tr>
+<td align="left">各个菜单系统的具体实现，封装的不行，对客户端暴露了数据结构，这是没有任何必要的</td>
+<td align="left">菜单的具体实现被封装，对外只公开迭代器，客户端不知道，也不需要知道具体菜单的实现</td>
+</tr>
+<tr>
+<td align="left">客户端被捆绑到了多个菜单实现类，牵一发动全身</td>
+<td align="left">客户端可以只用 iterator 接口做参数，通过向上转型，摆脱多个具体实现的捆绑，实现解耦</td>
+</tr>
+</tbody></table>
+<h3 id="继续发现问题"><a href="#继续发现问题" class="headerlink" title="继续发现问题"></a>继续发现问题</h3><p>客户端 Waitress 组合了多个具体实现类，仍然会牵一发动全身，比如修改了菜单的类名，客户端就失效，也需要修改，仍然重度依赖</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Waitress</span> </span>&#123;
+    <span class="hljs-comment">// 服务员依赖的菜单系统</span>
+    <span class="hljs-keyword">private</span> PancakeHouseMenu pancakeHouseMenu;
+    <span class="hljs-keyword">private</span> DinerMenu dinerMenu;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Waitress</span><span class="hljs-params">(PancakeHouseMenu pancakeHouseMenu, DinerMenu dinerMenu)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.pancakeHouseMenu = pancakeHouseMenu;
+        <span class="hljs-keyword">this</span>.dinerMenu = dinerMenu;
+    &#125;
+    ...</code></pre>
+
+<p>而且，具体菜单的实现类又有共同的方法 createIterator ，完全可以进一步抽象。</p>
+<h3 id="改进上述设计——充分利用-JDK-自带的迭代器"><a href="#改进上述设计——充分利用-JDK-自带的迭代器" class="headerlink" title="改进上述设计——充分利用 JDK 自带的迭代器"></a>改进上述设计——充分利用 JDK 自带的迭代器</h3><p>首先不再为List这样的数据结构重新实现迭代器，因为JDK 5 之后，Java 已经给我们实现好了，对于JDK 5 之后的所有集合容器，都可以采用 JDK 自带的迭代器接口——java.util,Itreator，所以我们就不用自己写，只需实现数组的迭代器即可。</p>
+<p>1、记住：JDK 不支持为数组生成迭代器</p>
+<p>2、java.util 包中的 Collection 接口——Java 所有的集合都实现了该接口，该接口有迭代器方法。</p>
+<h3 id="继续改进——抽象具体类的公共部分"><a href="#继续改进——抽象具体类的公共部分" class="headerlink" title="继续改进——抽象具体类的公共部分"></a>继续改进——抽象具体类的公共部分</h3><p>可以为各个菜单实现类，提供一个公共的接口——Menu</p>
+<h3 id="原则：面向接口编程"><a href="#原则：面向接口编程" class="headerlink" title="原则：面向接口编程"></a>原则：面向接口编程</h3><p>有多个具体实现类的时候，要首先考虑不针对实现编程，而是面向接口编程，除非有共同的抽象方法+属性时，可以考虑抽象父类。本案例中，只需使用接口，就可以减少客户端 waittress 和具体菜单实现类之间的依赖。</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午9:40</span>
+<span class="hljs-comment"> * 菜单系统要实现的方法，抽象为接口</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Menu</span> </span>&#123;
+    <span class="hljs-function">Iterator <span class="hljs-title">createIterator</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午9:41</span>
+<span class="hljs-comment"> * 菜单的每项，抽象为类</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MenuItem</span> </span>&#123;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> String description;<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MenuItem</span><span class="hljs-params">(String name,</span></span>
+<span class="hljs-function"><span class="hljs-params">                                               String description)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.description = description;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> description;
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午9:42</span>
+<span class="hljs-comment"> * 餐厅菜单系统的迭代器，不需要实现额外声明的迭代器接口，而是重写JDK的迭代器即可</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DinerMenuIterator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Iterator</span> </span>&#123;
+    <span class="hljs-keyword">private</span> MenuItem[] items;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> position = <span class="hljs-number">0</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DinerMenuIterator</span><span class="hljs-params">(MenuItem[] items)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.items = items;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> position &lt; items.length &amp;&amp; items[position] != <span class="hljs-keyword">null</span>;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>&#123;
+        MenuItem menuItem = items[position];
+        position = position + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">return</span> menuItem;
+    &#125;
+
+    <span class="hljs-comment">// 重新实现，最好是重写</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (position &lt;= <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException
+                    (<span class="hljs-string">&quot;You can&#x27;t remove an item until you&#x27;ve done at least one next()&quot;</span>);
+        &#125;
+
+        <span class="hljs-comment">// 删除线性表的元素，所有元素需要往前移动一个位置</span>
+        <span class="hljs-keyword">if</span> (items[position - <span class="hljs-number">1</span>] != <span class="hljs-keyword">null</span>) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = position - <span class="hljs-number">1</span>; i &lt; (items.length - <span class="hljs-number">1</span>); i++) &#123;
+                items[i] = items[i + <span class="hljs-number">1</span>];
+            &#125;
+
+            items[items.length - <span class="hljs-number">1</span>] = <span class="hljs-keyword">null</span>;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午9:50</span>
+<span class="hljs-comment"> * 餐厅菜单系统</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DinerMenu</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Menu</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAX_ITEMS = <span class="hljs-number">6</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> numberOfItems = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">private</span> MenuItem[] menuItems;
+
+    <span class="hljs-comment">// 实现方式不变</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DinerMenu</span><span class="hljs-params">()</span> </span>&#123;
+        menuItems = <span class="hljs-keyword">new</span> MenuItem[MAX_ITEMS];
+        addItem(<span class="hljs-string">&quot;Soup of the day&quot;</span>,
+                <span class="hljs-string">&quot;Soup of the day, with a side of potato salad&quot;</span>);
+    &#125;
+
+    <span class="hljs-comment">// 实现方式不变</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addItem</span><span class="hljs-params">(String name, String description)</span> </span>&#123;
+        MenuItem menuItem = <span class="hljs-keyword">new</span> MenuItem(name, description);
+        <span class="hljs-keyword">if</span> (numberOfItems &gt;= MAX_ITEMS) &#123;
+            System.err.println(<span class="hljs-string">&quot;Sorry, menu is full!  Can&#x27;t add item to menu&quot;</span>);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            menuItems[numberOfItems] = menuItem;
+            numberOfItems = numberOfItems + <span class="hljs-number">1</span>;
+        &#125;
+    &#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Iterator <span class="hljs-title">createIterator</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> DinerMenuIterator(menuItems);
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午9:52</span>
+<span class="hljs-comment"> * 煎饼，不需要再实现迭代器，因为使用的数据结构是JDK的容器，而对于JDK自带的集合容器，不需要自己实现迭代器</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PancakeHouseMenu</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Menu</span> </span>&#123;
+    <span class="hljs-keyword">private</span> List&lt;MenuItem&gt; menuItems;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PancakeHouseMenu</span><span class="hljs-params">()</span> </span>&#123;
+        menuItems = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        addItem(<span class="hljs-string">&quot;K&amp;B&#x27;s Pancake Breakfast&quot;</span>, <span class="hljs-string">&quot;Pancakes with scrambled eggs, and toast&quot;</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addItem</span><span class="hljs-params">(String name, String description)</span> </span>&#123;
+        MenuItem menuItem = <span class="hljs-keyword">new</span> MenuItem(name, description);
+        menuItems.add(menuItem);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Iterator <span class="hljs-title">createIterator</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-comment">// 返回 JDK ArrayList 自带的迭代器 iterator() 方法</span>
+        <span class="hljs-keyword">return</span> menuItems.iterator();
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午9:54</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Waitress</span> </span>&#123;
+    <span class="hljs-comment">// 服务员依赖的菜单系统——通过接口解耦合</span>
+    <span class="hljs-keyword">private</span> Menu pancakeHouseMenu;
+    <span class="hljs-keyword">private</span> Menu dinerMenu;
+
+    <span class="hljs-comment">// 修改为 Menu 接口，向上转型，解耦合</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Waitress</span><span class="hljs-params">(Menu pancakeHouseMenu, Menu dinerMenu)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.pancakeHouseMenu = pancakeHouseMenu;
+        <span class="hljs-keyword">this</span>.dinerMenu = dinerMenu;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 以后修改遍历逻辑，客户端不需要修改</span>
+<span class="hljs-comment">     * // 不用修改</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printMenu</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-comment">// 为每个菜单系统，创建迭代器</span>
+        <span class="hljs-comment">// java.util.Iterator;</span>
+        Iterator pancakeIterator = pancakeHouseMenu.createIterator();
+        Iterator dinerIterator = dinerMenu.createIterator();
+        printMenu(pancakeIterator);
+        printMenu(dinerIterator);
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 接口的用法，向上转型</span>
+<span class="hljs-comment">     * // 不用修改</span>
+<span class="hljs-comment">     * java.util.Iterator;</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printMenu</span><span class="hljs-params">(Iterator iterator)</span> </span>&#123;
+        <span class="hljs-comment">// 先判断是否还能继续迭代</span>
+        <span class="hljs-keyword">while</span> (iterator.hasNext()) &#123;
+            <span class="hljs-comment">// Iterator 接口里 next 返回的是 Object 对象，故需要强制转换</span>
+            MenuItem menuItem = (MenuItem) iterator.next();
+            System.out.print(menuItem.getName() + <span class="hljs-string">&quot;, &quot;</span>);
+            System.out.println(menuItem.getDescription());
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MenuTestDrive</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;
+        Menu pancakeHouseMenu = <span class="hljs-keyword">new</span> PancakeHouseMenu();
+        Menu dinerMenu = <span class="hljs-keyword">new</span> DinerMenu();
+        <span class="hljs-comment">// 即使具体的菜单实现类修改了名字或者环了实现类，客户端——Waitress 也不需要修改代码，解了耦合</span>
+        Waitress waitress = <span class="hljs-keyword">new</span> Waitress(pancakeHouseMenu, dinerMenu);
+        waitress.printMenu();
+    &#125;
+&#125;</code></pre>
+
+<h3 id="针对-JDK-的迭代器重写的原则"><a href="#针对-JDK-的迭代器重写的原则" class="headerlink" title="针对 JDK 的迭代器重写的原则"></a>针对 JDK 的迭代器重写的原则</h3><h4 id="remove-方法应不应该重写"><a href="#remove-方法应不应该重写" class="headerlink" title="remove 方法应不应该重写"></a>remove 方法应不应该重写</h4><p>虽然对于客户端来说，remove 方法非必须（当然业务需要的话，就必须自定义重写 remove），但是最好还是提供该方法，因为JDK的 Iterator接口里包含了该方法，如果不一起重写，可能会出问题。</p>
+<p>如果客户端真的不需要删除元素，那么最好也重写该方法，只需要在重写的时候抛出一个自定义的（或者现成的）异常——如果有调用，就提醒客户端不能删除元素。JDK也是这样设计的，默认抛出异常 UnsupportedOperationException</p>
+<h3 id="线程安全问题"><a href="#线程安全问题" class="headerlink" title="线程安全问题"></a>线程安全问题</h3><p>默认的迭代器接口是线程不安全的，如果有需要，要额外的加强线程安全。</p>
+<h3 id="迭代器模式的标准概念"><a href="#迭代器模式的标准概念" class="headerlink" title="迭代器模式的标准概念"></a>迭代器模式的标准概念</h3><p>迭代器模式又叫游标(Cursor)模式、Iterator模式，迭代子模式……是对象的行为模式之一，它把对容器中包含的内部对象的访问委托给外部的类，让外部的类可以使用 Iterator 按顺序进行遍历访问，而又不暴露其内部的数据结构。</p>
+<pre><code class="hljs pgsql">Iterator Pattern (Another <span class="hljs-type">Name</span>: <span class="hljs-keyword">Cursor</span>)
+Provide a way <span class="hljs-keyword">to</span> <span class="hljs-keyword">access</span> the elements <span class="hljs-keyword">of</span> an <span class="hljs-keyword">aggregate</span> <span class="hljs-keyword">object</span> sequentially <span class="hljs-keyword">without</span> exposing its underlying representation.</code></pre>
+
+<p>脱离Java的领域，那么可以认为：迭代器模式可以顺序地访问聚集中的元素，而不必暴露聚集的内部状态（internal representation）。它把遍历的责任转移到了迭代器，而不是聚集本身，简化了聚集的接口和实现代码，也分割了责任。</p>
+<h3 id="迭代器模式的角色"><a href="#迭代器模式的角色" class="headerlink" title="迭代器模式的角色"></a>迭代器模式的角色</h3><p>Iterator（迭代器接口）：该接口必须定义实现迭代功能的最小定义方法集，比如提供hasNext()和next()方法。</p>
+<p>ConcreteIterator（具体的迭代器实现类）：迭代器接口Iterator的实现类。可以根据具体情况加以实现。</p>
+<p>Aggregate（聚集的接口）：定义基本功能以及提供类似Iterator iterator()的方法。</p>
+<p>concreteAggregate（聚集接口的实现类）：容器接口的实现类。必须实现生成迭代器的方法。</p>
+<h3 id="聚集体如果不使用-Iterator-模式，会存在什么问题"><a href="#聚集体如果不使用-Iterator-模式，会存在什么问题" class="headerlink" title="聚集体如果不使用 Iterator 模式，会存在什么问题"></a>聚集体如果不使用 Iterator 模式，会存在什么问题</h3><h3 id="聚集类承担了太多功能"><a href="#聚集类承担了太多功能" class="headerlink" title="聚集类承担了太多功能"></a>聚集类承担了太多功能</h3><p>如果是自定义的聚集，那么需要由聚集自己实现顺序遍历的方法——直接在聚集的类里添加遍历方法。这样，容器类承担了太多功能：</p>
+<p>一方面需要提供添加、删除等本身应有的功能；</p>
+<p>一方面还需要提供遍历访问功能。</p>
+<p>不仅责任不分离，还和客户端耦合太强</p>
+<h3 id="暴露聚集的太多内部实现细节"><a href="#暴露聚集的太多内部实现细节" class="headerlink" title="暴露聚集的太多内部实现细节"></a>暴露聚集的太多内部实现细节</h3><p>如果不使用迭代器模式，那么需要客户端自己实现服务的遍历（联系餐厅和煎饼屋的合并案例），会直接暴露聚集的数据结构，往往这是不必要的，客户端不需要了解服务的具体实现，也是为了程序的安全——不暴露太多的内部细节给客户端。</p>
+<h3 id="遍历聚集的时候修改聚集的元素，引起聚集的状态混乱"><a href="#遍历聚集的时候修改聚集的元素，引起聚集的状态混乱" class="headerlink" title="遍历聚集的时候修改聚集的元素，引起聚集的状态混乱"></a>遍历聚集的时候修改聚集的元素，引起聚集的状态混乱</h3><p>如果使用的是 JDK 的集合类，如果直接遍历，且遍历的时候对集合修改，会有异常抛出。因为，往往容器在实现遍历的过程中，需要保存遍历状态，当遍历操作和元素的添加、删除等操作夹杂在一起，这些更新功能在遍历的时候也被调用，很容易引起集合的状态混乱和程序运行错误等。此时应该为聚集使用迭代器模式，如果是JDK的集合类，就直接使用自带的迭代器进行迭代。</p>
+<p>记住：Java 中的 foreach 循环看起来像一个迭代器，但实际上并不是，还是要使用迭代器模式</p>
+<p>Iterator 支持从源集合中安全地删除对象，只需在 Iterator 上调用 remove() 即可。这样做的好处是可以避免 ConcurrentModifiedException ，这个异常顾名思意：当打开 Iterator 迭代集合时，同时又在对集合进行修改。有些集合不允许在迭代时删除或添加元素，但是调用 Iterator 的remove() 方法是个安全的做法。</p>
+<pre><code class="hljs java"><span class="hljs-comment">//会抛出一个ConcurrentModificationException异常</span>
+List&lt;String&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>,<span class="hljs-string">&quot;c&quot;</span>,<span class="hljs-string">&quot;d&quot;</span>));
+        <span class="hljs-keyword">for</span>(String s : list)&#123;
+            <span class="hljs-keyword">if</span>(s.equals(<span class="hljs-string">&quot;a&quot;</span>))&#123;
+                list.remove(s);
+            &#125;
+        &#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-comment">//显示正常</span>
+List&lt;String&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>,<span class="hljs-string">&quot;c&quot;</span>,<span class="hljs-string">&quot;d&quot;</span>));
+        Iterator&lt;String&gt; iter = list.iterator();
+        <span class="hljs-keyword">while</span>(iter.hasNext())&#123;
+            String s = iter.next();
+            <span class="hljs-keyword">if</span>(s.equals(<span class="hljs-string">&quot;a&quot;</span>))&#123;
+                iter.remove();
+            &#125;
+        &#125;
+<span class="hljs-comment">// next() 必须在 remove() 之前调用。</span>
+<span class="hljs-comment">// 在 foreach 中，编译器会使 next() 在删除元素之后被调用，因此就会抛出 ConcurrentModificationException 异常</span></code></pre>
+
+<p>参考</p>
+<p>1、 <a target="_blank" rel="noopener" href="http://www.cnblogs.com/softidea/p/3760213.html">Iterator的remove方法可保证从源集合中安全地删除对象（转）</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/softidea/p/3760213.html">2、正确遍历删除List中的元素方法  </a> <a target="_blank" rel="noopener" href="http://www.jb51.net/article/98763.htm">http://www.jb51.net/article/98763.htm</a></p>
+<h3 id="使用迭代器模式的优点"><a href="#使用迭代器模式的优点" class="headerlink" title="使用迭代器模式的优点"></a>使用迭代器模式的优点</h3><p>Iterator 模式就是为了有效地处理按顺序进行遍历访问的一种设计模式，简单地说，Iterator模式提供一种有效的方法，可以屏蔽聚集对象的容器类的实现细节，而能对容器内包含的对象元素按顺序进行有效的遍历访问。所以，Iterator模式的应用场景可以归纳为以下几个：</p>
+<ul>
+<li>访问容器中包含的内部对象</li>
+<li>按顺序访问</li>
+</ul>
+<p>优点总结：</p>
+<p>1，实现功能分离，简化聚集的接口。让聚集只实现本身的基本功能，把迭代功能委托给外部类实现，符合类的单一职责设计原则。</p>
+<p>2，隐藏聚集的实现细节，符合最小知道原则。为聚集或其子容器提供了一个统一接口，一方面方便客户端调用；另一方面使得客户端不必关注迭代器的实现细节。</p>
+<p>3，可以为聚集或其子容器实现不同的迭代器，搭配其他设计模式，比如策略模式等，可以很容易的切换。</p>
+<p>4、客户端可以同时使用多个迭代器遍历一个聚集。</p>
+<h3 id="List-迭代的方向问题"><a href="#List-迭代的方向问题" class="headerlink" title="List 迭代的方向问题"></a>List 迭代的方向问题</h3><p>都知道，next 方法是正向遍历，那么自然可以实现反向遍历，新加一个取得前一个元素的方法 + 一个判断游标是否已经走到了首节点的方法即可解决。</p>
+<p>JDK也为我们做了实现：ListIterator接口，提供了一个previous方法，JDK中的任何实现了List接口的集合，都可以实现反向迭代。</p>
+<h3 id="非线性数据结构的迭代问题"><a href="#非线性数据结构的迭代问题" class="headerlink" title="非线性数据结构的迭代问题"></a>非线性数据结构的迭代问题</h3><p>澄清一个问题——迭代器模式是没有约束元素顺序的，即 next （previous）只是取出元素，并不是强制元素取出的先后顺序等价于元素的某种排序。通俗的说，不论是线性结构还是非线性的，甚至是包含重复元素的结构，除非有特殊业务需求，都能对其实现迭代器模式。</p>
+<p>不可幻想：迭代的顺序就等价于集合中元素的某种有意义的排序，两者没有必然关系，谨记以避免做出错误判断，除非有自定义的顺序约束。</p>
+<h3 id="单一职责设计原则和迭代器模式"><a href="#单一职责设计原则和迭代器模式" class="headerlink" title="单一职责设计原则和迭代器模式"></a>单一职责设计原则和迭代器模式</h3><p>设计原则：一个类只有一个引起变化的原因。如果有一个类具有两个改变的原因，那么这会使得将来该类的变化机率上升，而当它真的改变时，你的设计中同时又有两个方面将会受到影响。</p>
+<h3 id="高内聚-gt-单一职责原则"><a href="#高内聚-gt-单一职责原则" class="headerlink" title="高内聚 &gt; 单一职责原则"></a>高内聚 &gt; 单一职责原则</h3><p>内聚：用来度量一个类或者模块紧密的达到了单一职责的目的（or 责任）。当一个类或者一个模块被设计为只支持一组相关的功能的时候，就说它具有高内聚的特性，反之就是低内聚的。</p>
+<p>高内聚是一个比单一职责更普遍的概念，即遵守了高内聚的类，也同样具有单一职责。</p>
+<h3 id="迭代器模式就遵循了单一职责原则"><a href="#迭代器模式就遵循了单一职责原则" class="headerlink" title="迭代器模式就遵循了单一职责原则"></a>迭代器模式就遵循了单一职责原则</h3><p>其实前面的分析已经很全面，迭代器模式，分离了聚集的迭代的责任，有效的契合了单一职责设计原则。</p>
+<h3 id="扩展案例：合并咖啡厅的菜单系统"><a href="#扩展案例：合并咖啡厅的菜单系统" class="headerlink" title="扩展案例：合并咖啡厅的菜单系统"></a>扩展案例：合并咖啡厅的菜单系统</h3><p>为其合并后的系统，增加咖啡厅的菜单，供应晚餐。下面是咖啡厅的菜单系统实现：</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午10:15</span>
+<span class="hljs-comment"> * 合并之后的咖啡厅菜单实现类</span>
+<span class="hljs-comment"> * hash表也实现了JDK的迭代器，不需要RD自己实现</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CafeMenu</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Menu</span> </span>&#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 菜单使用了hash表存储，和现有的两个菜单系统实现不一样</span>
+<span class="hljs-comment">     * 实现不变</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">private</span> Map&lt;String, MenuItem&gt; menuItems = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+
+    <span class="hljs-comment">// 实现不变</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CafeMenu</span><span class="hljs-params">()</span> </span>&#123;
+        addItem(<span class="hljs-string">&quot;Veggie Burger and Air Fries&quot;</span>,
+                <span class="hljs-string">&quot;Veggie burger on a whole wheat bun, lettuce, tomato, and fries&quot;</span>);
+    &#125;
+
+    <span class="hljs-comment">// 实现不变</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addItem</span><span class="hljs-params">(String name, String description)</span> </span>&#123;
+        MenuItem menuItem = <span class="hljs-keyword">new</span> MenuItem(name, description);
+        menuItems.put(menuItem.getName(), menuItem);
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * hash表支持JDK自带的迭代器 java.util.Iterator;</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Iterator <span class="hljs-title">createIterator</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-comment">// 返回 java.util.Iterator; 只需要取得 hash 表的 value 集合即可</span>
+        <span class="hljs-keyword">return</span> menuItems.values().iterator();
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午10:16</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Waitress</span> </span>&#123;
+    <span class="hljs-keyword">private</span> Menu pancakeHouseMenu;
+    <span class="hljs-keyword">private</span> Menu dinerMenu;
+    <span class="hljs-comment">// 需要增加 cafeMenu</span>
+    <span class="hljs-keyword">private</span> Menu cafeMenu;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 如果，太多的参数，可以使用建造者模式优化构造器</span>
+<span class="hljs-comment">     * 需要增加 cafeMenu 参数</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Waitress</span><span class="hljs-params">(Menu pancakeHouseMenu, Menu dinerMenu, Menu cafeMenu)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.pancakeHouseMenu = pancakeHouseMenu;
+        <span class="hljs-keyword">this</span>.dinerMenu = dinerMenu;
+        <span class="hljs-keyword">this</span>.cafeMenu = cafeMenu;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 需要增加 cafeMenu 的迭代器</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printMenu</span><span class="hljs-params">()</span> </span>&#123;
+        Iterator pancakeIterator = pancakeHouseMenu.createIterator();
+        Iterator dinerIterator = dinerMenu.createIterator();
+        Iterator cafeIterator = cafeMenu.createIterator();
+        printMenu(pancakeIterator);
+        printMenu(dinerIterator);
+        printMenu(cafeIterator);
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 无需修改</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printMenu</span><span class="hljs-params">(Iterator iterator)</span> </span>&#123;
+        <span class="hljs-keyword">while</span> (iterator.hasNext()) &#123;
+            MenuItem menuItem = (MenuItem) iterator.next();
+            System.out.print(menuItem.getName() + <span class="hljs-string">&quot;, &quot;</span>);
+            System.out.println(menuItem.getDescription());
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="继续发现系统的问题——客户端违反了开闭原则"><a href="#继续发现系统的问题——客户端违反了开闭原则" class="headerlink" title="继续发现系统的问题——客户端违反了开闭原则"></a>继续发现系统的问题——客户端违反了开闭原则</h3><p>合并咖啡厅的过程中，发现每次合并新菜单，都要打开客户端，修改代码……客户端实现很丑陋，违反了开闭原则。</p>
+<p>虽然我们抽象了菜单，让其在客户端解耦，并且为菜单系统分别实现了迭代器，让迭代责任分离，对客户端隐藏了具体实现，使用同一的迭代器接口，解耦了迭代动作。但是，仍然将菜单处理分成独立的对象看待，导致每次扩展，都需要修改客户端——客户端需要反复写：调用printMenue的代码，代码冗余严重，而且每次都要给构造器增加新参数。</p>
+<p>需要一种更好的办法——集中管理菜单，使其使用一个迭代器即可应付菜单的扩展</p>
+<h4 id="解决方案：抽象客户端各个独立的菜单系统，只需保留一个迭代器"><a href="#解决方案：抽象客户端各个独立的菜单系统，只需保留一个迭代器" class="headerlink" title="解决方案：抽象客户端各个独立的菜单系统，只需保留一个迭代器"></a>解决方案：抽象客户端各个独立的菜单系统，只需保留一个迭代器</h4><p>使用现成的 ArrayList 类实现：</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-20 下午10:18</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Waitress1</span> </span>&#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 把各个菜单系统集中到一个list，充分利用list的迭代器</span>
+<span class="hljs-comment">     * 只需要一个类就搞定，不再每次都add一个菜单类了</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">private</span> List&lt;Menu&gt; menus;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Waitress1</span><span class="hljs-params">(List&lt;Menu&gt; menus)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.menus = menus;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printMenu</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-comment">// 取得list的迭代器，直接使用一个迭代器，就能遍历所有菜单，不需要在修改</span>
+        Iterator menuIterator = menus.iterator();
+        <span class="hljs-keyword">while</span> (menuIterator.hasNext()) &#123;
+            Menu menu = (Menu) menuIterator.next();
+            printMenu(menu.createIterator());
+        &#125;
+    &#125;
+
+    <span class="hljs-comment">// 代码不需要变</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printMenu</span><span class="hljs-params">(Iterator iterator)</span> </span>&#123;
+        <span class="hljs-keyword">while</span> (iterator.hasNext()) &#123;
+            MenuItem menuItem = (MenuItem) iterator.next();
+            System.out.print(menuItem.getName() + <span class="hljs-string">&quot;, &quot;</span>);
+            System.out.println(menuItem.getDescription());
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="基于迭代器模式实现的菜单系统无法实现树状菜单（无法扩展子菜单）"><a href="#基于迭代器模式实现的菜单系统无法实现树状菜单（无法扩展子菜单）" class="headerlink" title="基于迭代器模式实现的菜单系统无法实现树状菜单（无法扩展子菜单）"></a>基于迭代器模式实现的菜单系统无法实现树状菜单（无法扩展子菜单）</h3><p>现在希望能够加上一份餐后甜点“子菜单”作为晚餐的饭后补充。如果我们能让甜点菜单变成餐厅菜单集合的一个子元素，就可以完美的解决。但是根据现在的实现，根本做不到。因为饭后甜点子菜单的实现基于数组——不变的，类型不同，无法扩展。生产环境中，这样的系统非常复杂，更加困难。</p>
+<h3 id="解决方案——树"><a href="#解决方案——树" class="headerlink" title="解决方案——树"></a>解决方案——树</h3><p>1、需要某种树形结构，可以容纳菜单、子菜单和菜单项。</p>
+<p>2、需要确定能够在每个菜单的各个项目之间游走，而且至少要像现在用迭代器一样方便。</p>
+<p>3、需要能够更有弹性地在菜单项之间游走。比方说：可能只需要遍历甜点菜单，或者可以遍历餐厅的整个菜单。</p>
+<p>此时，需要一种新的设计模式来解决这个案例的难题——组合模式</p>
+<p>完整代码已经上传至<a target="_blank" rel="noopener" href="https://github.com/iMLe0n/DesignPatterns/tree/master/src/iterator">github</a></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/29/2019-05-21-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%EF%BC%88Composite%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/29/2019-05-08-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%EF%BC%88Command%EF%BC%89/">
+                        <span class="hidden-mobile">设计模式之命令模式（Command）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <!-- <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> -->
+	  <span>Copyright © 2020</span>
+      <!--<i class="iconfont icon-love"></i>-->
+      <!--<a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>-->
+		
+	  <a href="http://www.cltc.club" target="_blank" rel="nofollow noopener"><span>CLTC.CLUB</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">浙ICP备18021007号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "设计模式之迭代器模式（Iterator）&nbsp;",
+      ],
+      cursorChar: "~",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+  <script>(function (i, s, o, g, r, a, m) {
+      i['DaoVoiceObject'] = r;
+      i[r] = i[r] ||
+        function () {
+          (i[r].q = i[r].q || []).push(arguments);
+        };
+      i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      a.charset = 'utf-8';
+      m.parentNode.insertBefore(a, m);
+    })(window, document, 'script', ('https:' === document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/08ff2aaf.js", 'daovoice');
+    daovoice('init', {
+      app_id: "08ff2aaf",
+    });
+    daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/node_modules/hexo-helper-live2dlib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"node_modules/hexo-helper-live2d","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"jsonPath":"/node_modules/hexo-helper-live2dassets/tororo.model.json"},"log":false});</script></body>
+</html>

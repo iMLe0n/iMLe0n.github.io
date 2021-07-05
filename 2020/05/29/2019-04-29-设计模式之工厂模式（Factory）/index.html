@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Leon Charles">
+  <meta name="keywords" content="">
+  <title>设计模式之工厂模式（Factory） - iMLe0n</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>iMLe0n</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-05-29 17:20">
+      2020年5月29日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h2 id="设计模式之工厂模式（Factory）"><a href="#设计模式之工厂模式（Factory）" class="headerlink" title="设计模式之工厂模式（Factory）"></a>设计模式之工厂模式（Factory）</h2><p>​    <strong>能胜强敌者，先自胜者也。——《商君书·画策》</strong></p>
+<ul>
+<li>简单工厂模式（Simple Factory）</li>
+<li>工厂方法模式（Factory Method）</li>
+<li>抽象工厂模式（Abstract Factory）</li>
+</ul>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=22779936&auto=0&height=66"></iframe>
+
+<h3 id="简单工厂模式（Simple-Factory）"><a href="#简单工厂模式（Simple-Factory）" class="headerlink" title="简单工厂模式（Simple Factory）"></a><strong>简单工厂模式（Simple Factory）</strong></h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a><strong>定义</strong></h4><p>在创建一个对象时不向客户暴露内部细节，并提供一个创建对象的通用接口。（其实，简单工厂模式并不是一种设计模式，反而比较像是一种编程习惯，而因为经常被使用，被误认为是“工厂模式” ）。</p>
+<h4 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h4><p>简单工厂把实例化的操作单独放到一个类中，这个类就成为简单工厂类，让简单工厂类来决定应该用哪个具体子类来实例化。</p>
+<p>这样做能把客户类和具体子类的实现解耦，客户类不再需要知道有哪些子类以及应当实例化哪个子类。客户类往往有多个，如果不使用简单工厂，那么所有的客户类都要知道所有子类的细节。而且一旦子类发生改变，例如增加子类，那么所有的客户类都要进行修改。</p>
+<p><img src="/images/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E7%B1%BB%E5%9B%BE.png" srcset="/img/loading.gif"></p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pizza</span> </span>&#123;
+    String name;
+    String dough;
+    String sauce;
+    ArrayList&lt;String&gt; toppings = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">prepare</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;Preparing &quot;</span> + name);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">bake</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;Baking &quot;</span> + name);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">cut</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;Cutting &quot;</span> + name);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">box</span><span class="hljs-params">()</span></span>&#123;
+        System.out.println(<span class="hljs-string">&quot;Cutting &quot;</span> + name);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;
+        StringBuffer display = <span class="hljs-keyword">new</span> StringBuffer();
+        display.append(<span class="hljs-string">&quot;---- &quot;</span> + name + <span class="hljs-string">&quot; ----\n&quot;</span>);
+        display.append(dough + <span class="hljs-string">&quot;\n&quot;</span>);
+        display.append(sauce + <span class="hljs-string">&quot;\n&quot;</span>);
+        <span class="hljs-keyword">for</span> (String topping : toppings)&#123;
+            display.append(topping + <span class="hljs-string">&quot;\n&quot;</span>);
+        &#125;
+        <span class="hljs-keyword">return</span> display.toString();
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CheesePizza</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Pizza</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CheesePizza</span><span class="hljs-params">()</span> </span>&#123;
+        name = <span class="hljs-string">&quot;Cheese Pizza&quot;</span>;
+        dough = <span class="hljs-string">&quot;Regular Crust&quot;</span>;
+        sauce = <span class="hljs-string">&quot;Marinara Pizza Sauce&quot;</span>;
+        toppings.add(<span class="hljs-string">&quot;Fresh Mozzarella&quot;</span>);
+        toppings.add(<span class="hljs-string">&quot;Parmesan&quot;</span>);
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimplePizzaFactory</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Pizza <span class="hljs-title">createPizza</span><span class="hljs-params">(String type)</span> </span>&#123;
+        Pizza pizza = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">if</span> (type.equals(<span class="hljs-string">&quot;cheese&quot;</span>)) &#123;
+            pizza = <span class="hljs-keyword">new</span> CheesePizza();
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (type.equals(<span class="hljs-string">&quot;pepperoni&quot;</span>)) &#123;
+            pizza = <span class="hljs-keyword">new</span> PepperoniPizza();
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (type.equals(<span class="hljs-string">&quot;clam&quot;</span>)) &#123;
+            pizza = <span class="hljs-keyword">new</span> ClamPizza();
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (type.equals(<span class="hljs-string">&quot;veggie&quot;</span>)) &#123;
+            pizza = <span class="hljs-keyword">new</span> VeggiePizza();
+        &#125;
+        <span class="hljs-keyword">return</span> pizza;
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaStore</span> </span>&#123;
+    SimplePizzaFactory factory;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PizzaStore</span><span class="hljs-params">(SimplePizzaFactory factory)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.factory = factory;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Pizza <span class="hljs-title">orderPizza</span><span class="hljs-params">(String type)</span> </span>&#123;
+        Pizza pizza;
+        pizza = factory.createPizza(type);
+
+        pizza.prepare();
+        pizza.bake();
+        pizza.cut();
+        pizza.box();
+
+        <span class="hljs-keyword">return</span> pizza;
+    &#125;
+&#125;</code></pre>
+
+<p>完整代码已经上传至<a target="_blank" rel="noopener" href="https://github.com/iMLe0n/DesignPatterns/tree/master/src/factory/simpleFactory">github</a></p>
+<h3 id="工厂方法模式（Factory-Method）"><a href="#工厂方法模式（Factory-Method）" class="headerlink" title="工厂方法模式（Factory Method）"></a><strong>工厂方法模式（Factory Method）</strong></h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a><strong>定义</strong></h4><p>定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。</p>
+<h4 id="类图-1"><a href="#类图-1" class="headerlink" title="类图"></a>类图</h4><p>在简单工厂中，创建对象的是另一个类，而在工厂方法中，是由子类来创建对象。</p>
+<p>下图中，Factory 有一个 doSomething() 方法，这个方法需要用到一个产品对象，这个产品对象由 factoryMethod() 方法创建。该方法是抽象的，需要由子类去实现。</p>
+<p><img src="/images/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E7%B1%BB%E5%9B%BE.png" srcset="/img/loading.gif"></p>
+<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaStore</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">abstract</span> Pizza <span class="hljs-title">createPizza</span><span class="hljs-params">(String item)</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Pizza <span class="hljs-title">orderPizza</span><span class="hljs-params">(String type)</span></span>&#123;
+        Pizza pizza = createPizza(type);
+        System.out.println(<span class="hljs-string">&quot;--- Making a &quot;</span> + pizza.getName() + <span class="hljs-string">&quot; ---&quot;</span>);
+        pizza.prepare();
+        pizza.bake();
+        pizza.cut();
+        pizza.box();
+        <span class="hljs-keyword">return</span> pizza;
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ChicagoPizzaStore</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PizzaStore</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function">Pizza <span class="hljs-title">createPizza</span><span class="hljs-params">(String item)</span> </span>&#123;
+        <span class="hljs-keyword">switch</span> (item) &#123;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;cheese&quot;</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ChicagoStyleCheesePizza();
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;veggie&quot;</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ChicagoStyleVeggiePizza();
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;clam&quot;</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ChicagoStyleClamPizza();
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;pepperoni&quot;</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ChicagoStylePepperoniPizza();
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NYPizzaStore</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PizzaStore</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function">Pizza <span class="hljs-title">createPizza</span><span class="hljs-params">(String item)</span> </span>&#123;
+        <span class="hljs-keyword">switch</span> (item) &#123;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;cheese&quot;</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> NYStyleCheesePizza();
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;veggie&quot;</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> NYStyleVeggiePizza();
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;clam&quot;</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> NYStyleClamPizza();
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;pepperoni&quot;</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> NYStylePepperoniPizza();
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>完整代码已经上传至<a target="_blank" rel="noopener" href="https://github.com/iMLe0n/DesignPatterns/tree/master/src/factory/factorymethod">github</a></p>
+<h3 id="抽象工厂模式（Abstract-Factory）"><a href="#抽象工厂模式（Abstract-Factory）" class="headerlink" title="抽象工厂模式（Abstract Factory）"></a>抽象工厂模式（Abstract Factory）</h3><h4 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a><strong>定义</strong></h4><p>抽象工厂模式提供一个接口，用于创建或依赖对象的家族，而不需要明确指定具体类。</p>
+<h4 id="类图-2"><a href="#类图-2" class="headerlink" title="类图"></a><strong>类图</strong></h4><p><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Abstract_factory.svg" srcset="/img/loading.gif"></p>
+<p><code>GuiFactory</code>接口中的<code>createButton</code>方法返回<code>Button</code>类型的对象。返回<code>Button</code>的哪种实现依赖于使用<code>GuiFactory</code>的哪种实现。</p>
+<p>需要注意的是，为了简洁起见，以上类图仅仅展示了创建一个类型对象的工厂。而在抽象工厂模式中，通常一个工厂能够创建若干种不同类型的对象。</p>
+<h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a><strong>实现</strong></h4><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Button</span> </span>&#123;
+     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">getButton</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MacButton</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Button</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getButton</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;MacButton&quot;</span>);
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WinButton</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Button</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getButton</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;WinButton&quot;</span>);
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">GUIFactory</span> </span>&#123;
+    <span class="hljs-function">Button <span class="hljs-title">createButton</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function">Border <span class="hljs-title">createBorder</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MacFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">GUIFactory</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Button <span class="hljs-title">createButton</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MacButton();
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Border <span class="hljs-title">createBorder</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MacBorder();
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WinFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">GUIFactory</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Button <span class="hljs-title">createButton</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WinButton();
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Border <span class="hljs-title">createBorder</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WinBorder();
+    &#125;
+&#125;</code></pre>
+
+<p>完整代码已经上传至<a target="_blank" rel="noopener" href="https://github.com/iMLe0n/DesignPatterns/tree/master/src/factory/abstractfactory">github</a></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/29/2019-05-08-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%EF%BC%88Command%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">设计模式之命令模式（Command）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/29/2019-05-09-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88Adapter%EF%BC%89/">
+                        <span class="hidden-mobile">设计模式之适配器模式（Adapter）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <!-- <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> -->
+	  <span>Copyright © 2020</span>
+      <!--<i class="iconfont icon-love"></i>-->
+      <!--<a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>-->
+		
+	  <a href="http://www.cltc.club" target="_blank" rel="nofollow noopener"><span>CLTC.CLUB</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">浙ICP备18021007号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "设计模式之工厂模式（Factory）&nbsp;",
+      ],
+      cursorChar: "~",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+  <script>(function (i, s, o, g, r, a, m) {
+      i['DaoVoiceObject'] = r;
+      i[r] = i[r] ||
+        function () {
+          (i[r].q = i[r].q || []).push(arguments);
+        };
+      i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      a.charset = 'utf-8';
+      m.parentNode.insertBefore(a, m);
+    })(window, document, 'script', ('https:' === document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/08ff2aaf.js", 'daovoice');
+    daovoice('init', {
+      app_id: "08ff2aaf",
+    });
+    daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/node_modules/hexo-helper-live2dlib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"node_modules/hexo-helper-live2d","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"jsonPath":"/node_modules/hexo-helper-live2dassets/tororo.model.json"},"log":false});</script></body>
+</html>

@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Leon Charles">
+  <meta name="keywords" content="">
+  <title>iMLe0n</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>iMLe0n</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-05-29 17:20">
+      2020年5月29日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      66
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>layout: post<br>title: 设计模式之组合模式（Composite）<br>description: “设计模式之组合模式（Composite）”<br>modified: 2019-05-21<br>tags: [设计模式]<br>image:<br>  path: /img/abstract-7.jpg<br>  feature: abstract-7.jpg<br>  credit: iMLe0n</p>
+<h2 id="设计模式之组合模式（Composite）"><a href="#设计模式之组合模式（Composite）" class="headerlink" title="设计模式之组合模式（Composite）"></a>设计模式之组合模式（Composite）</h2><p><strong>只要你坚持做某件事情，那你就在那个领域比百分之九十的人成功了</strong></p>
+<h3 id="组合模式的概念"><a href="#组合模式的概念" class="headerlink" title="组合模式的概念"></a>组合模式的概念</h3><p>组合模式，也叫 Composite 模式……是构造型的设计模式之一。</p>
+<p>组合模式允许对象组合成树形结构，来表现“整体/部分”的层次结构，使得客户端对单个对象和组合对象的使用具有一致性。</p>
+<p>Composite Pattern</p>
+<p>Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly.</p>
+<p>有一些拗口，通俗的说：组合模式是关于怎样将对象形成树形结构来表现整体和部分的层次结构的成熟模式。</p>
+<p>使用组合模式，可以让用户以一致的方式处理个体对象和组合对象，组合模式的关键在于无论是个体对象还是组合对象都实现了相同的接口或都是同一个抽象类的子类。</p>
+<p>即，组合模式，它能通过递归来构造树形的对象结构，并可以通过一个对象来访问整个对象树。</p>
+<p>即，组合模式，在大多数情况下，可以让客户端忽略对象个体和对象组合之间的差异。</p>
+<h3 id="组合模式的角色和类图"><a href="#组合模式的角色和类图" class="headerlink" title="组合模式的角色和类图"></a>组合模式的角色和类图</h3><p>结合数据结构里的树，其实很好写出来。无非就是叶子和非叶子节点的的组合。</p>
+<p>1、需要一个类为叶子节点和非叶子节点的共同抽象父类，如图里的 Component 接口（抽象类也可以），是树形结构的节点的抽象：</p>
+<ul>
+<li>为所有的对象，包括叶子节点，定义统一的接口（公共属性，行为等的定义）</li>
+<li>提供管理子节点对象的接口方法</li>
+<li>[可选]提供管理父节点对象的接口方法</li>
+</ul>
+<p>2、设计一个 Leaf 类代表树的叶节点，这个要单独拿出来区分，是 Component 的实现子类</p>
+<p>3、设计一个 Composite 类作为树枝节点，即非叶节点，也是 Component 的实现子类</p>
+<p>4、client 客户端，它使用 Component 接口操作树</p>
+<h3 id="组合（Composite）、组件（Component接口）、和树的关系"><a href="#组合（Composite）、组件（Component接口）、和树的关系" class="headerlink" title="组合（Composite）、组件（Component接口）、和树的关系"></a>组合（Composite）、组件（Component接口）、和树的关系</h3><p>在该模式里熟悉一些定义，其实没必要死记硬背，定义随便起名字，只要能自洽即可。</p>
+<p>1、组合（Composite）包含了组件（Component）</p>
+<p>2、组件 Component 接口 = 组合Composite + 叶节点Leaf，因为组件是抽象的，叶子和枝节点（组合）是组件的具体表现，很好理解。</p>
+<p>其实就是递归，得到的是由上而下的树形结构，根部是一个组合Composite，而组合的分支延伸展开（组合包含了组件），直至叶子节点leaf为止。</p>
+<h3 id="基于组合模式改进迭代器模式里的菜单系统"><a href="#基于组合模式改进迭代器模式里的菜单系统" class="headerlink" title="基于组合模式改进迭代器模式里的菜单系统"></a>基于组合模式改进迭代器模式里的菜单系统</h3><p>如菜单子系统的实现，就是典型的树状结构</p>
+<p>需要一个抽象组件 Component，例子里是 MenuComponent，作为菜单节点和菜单节点项（叶子）的共同接口，能够让客户端使用统一的方法来操作菜单和菜单项。</p>
+<p>如下，所有的组件（叶子+树枝（非叶子））都必须实现这个组件接口，又因为叶子节点（即菜单项）和树枝节点（即组合节点）分工不同，所以需要在抽象的组件类中实现默认的方法，因为某些方法可能只在某类节点中有意义。一般是做抛出运行时异常（自定义的异常）的处理。</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-21 下午9:35</span>
+<span class="hljs-comment"> * 菜单和菜单项的抽象——组件，让菜单和菜单项能共用</span>
+<span class="hljs-comment"> * 又因为希望这个抽象组件能提供一些默认的操作，故使用了抽象类</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MenuComponent</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(MenuComponent menuComponent)</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">(MenuComponent menuComponent)</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> MenuComponent <span class="hljs-title">getChild</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getPrice</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isVegetarian</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+&#125;</code></pre>
+
+<p>下面编写叶子节点——菜单的菜单项类。</p>
+<p>这是组合模式类图里的叶子角色，它只负责实现组合的内部元素的行为，因此宏观上管理整个菜单的方法，比如 add 、remove 等，它不应该复写，对她没有意义。</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-21 下午9:37</span>
+<span class="hljs-comment"> * 叶子节点，代表菜单里的一项</span>
+<span class="hljs-comment"> * 只复写对其有意义的方法，没有意义的方法，比如获得子节点等，就不理会即可</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MenuItem</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">MenuComponent</span> </span>&#123;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> String description;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> vegetarian;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> price;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MenuItem</span><span class="hljs-params">(String name, String description, <span class="hljs-keyword">boolean</span> vegetarian, <span class="hljs-keyword">double</span> price)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.description = description;
+        <span class="hljs-keyword">this</span>.vegetarian = vegetarian;
+        <span class="hljs-keyword">this</span>.price = price;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> description;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getPrice</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> price;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isVegetarian</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> vegetarian;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.print(<span class="hljs-string">&quot;  &quot;</span> + getName());
+        <span class="hljs-keyword">if</span> (isVegetarian()) &#123;
+            System.out.print(<span class="hljs-string">&quot;(v)&quot;</span>);
+        &#125;
+
+        System.out.println(<span class="hljs-string">&quot;, &quot;</span> + getPrice());
+        System.out.println(<span class="hljs-string">&quot;     -- &quot;</span> + getDescription());
+    &#125;
+&#125;</code></pre>
+
+<p>下面，编写树枝节点——菜单，也就是组合类。</p>
+<p>之前的菜单项是的单个的组件类，而组合类才体现了递归思想，组合类聚合了组件类。一些对其没有意义的方法，同样不需要复写实现。</p>
+<p>菜单也可以有子菜单（菜单项其实本质也可以是子菜单），所以组合了一个 Arraylist<MenuComponent>，因为菜单和菜单项都属于 MenuComponent，那么使用同样的方法，可以兼顾两者，这正应了组合模式的意义—— 使用组合模式，可以让用户以一致的方式处理个体对象和组合对象，组合模式的关键在于无论是个体对象还是组合对象都实现了相同的接口或都是同一个抽象类的子类。 </p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-21 下午9:39</span>
+<span class="hljs-comment"> * 树枝节点，也就是组合节点——代表各个菜单</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Menu</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">MenuComponent</span> </span>&#123;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> String description;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 依赖了菜单组件，递归的实现</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">private</span> List&lt;MenuComponent&gt; menuComponents = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Menu</span><span class="hljs-params">(String name, String description)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.description = description;
+    &#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(MenuComponent menuComponent)</span> </span>&#123;
+        menuComponents.add(menuComponent);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">(MenuComponent menuComponent)</span> </span>&#123;
+        menuComponents.remove(menuComponent);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> MenuComponent <span class="hljs-title">getChild</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> menuComponents.get(i);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> description;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 因为菜单作为树枝节点，它是一个组合，包含了菜单项和其他的子菜单，所以 print()应该打印出它包含的一切。</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.print(<span class="hljs-string">&quot;\n&quot;</span> + getName());
+        System.out.println(<span class="hljs-string">&quot;, &quot;</span> + getDescription());
+        System.out.println(<span class="hljs-string">&quot;---------------------&quot;</span>);
+
+        <span class="hljs-comment">// 使用了迭代器（迭代器模式和组合模式的有机结合），遍历菜单的菜单项</span>
+        Iterator iterator = menuComponents.iterator();
+        <span class="hljs-keyword">while</span> (iterator.hasNext()) &#123;
+            <span class="hljs-comment">// 打印这个节点包含的一切，print 可以兼顾两类节点，这是组合模式的特点</span>
+            MenuComponent menuComponent = (MenuComponent) iterator.next();
+            menuComponent.print(); <span class="hljs-comment">// 递归思想的应用</span>
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>因为菜单是一个组合，包含了菜单项和其他的子菜单，所以它的print()应该打印出它包含的一切，此时递归思想派上了用场。</p>
+<p>下面编写客户端——服务员类</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-21 下午9:47</span>
+<span class="hljs-comment"> * 客户端，也就是服务员类，聚合了菜单组件接口（这里是抽象类）控制菜单，解耦合</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Waitress</span> </span>&#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 聚合了菜单组件——这一抽象节点，能兼顾叶子节点和树枝节点</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">private</span> MenuComponent allMenus;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Waitress</span><span class="hljs-params">(MenuComponent allMenus)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.allMenus = allMenus;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printMenu</span><span class="hljs-params">()</span> </span>&#123;
+        allMenus.print();
+    &#125;
+&#125;</code></pre>
+
+<p>客户端类代码很简单，只需要聚合一个顶层的组件接口即可。最顶层的菜单组件可以兼顾所有菜单或者菜单项，故客户端只需要调用一次最顶层的print方法，即可打印整个菜单系统。</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-21 下午9:50</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MenuTestDrive</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        <span class="hljs-comment">// 创建所有的菜单系统，它们本质上都是组合节点——MenuComponent</span>
+        MenuComponent pancakeHouseMenu = <span class="hljs-keyword">new</span> Menu(<span class="hljs-string">&quot;PANCAKE HOUSE MENU&quot;</span>, <span class="hljs-string">&quot;Breakfast&quot;</span>);
+        MenuComponent dinerMenu = <span class="hljs-keyword">new</span> Menu(<span class="hljs-string">&quot;DINER MENU&quot;</span>, <span class="hljs-string">&quot;Lunch&quot;</span>);
+        MenuComponent cafeMenu = <span class="hljs-keyword">new</span> Menu(<span class="hljs-string">&quot;CAFE MENU&quot;</span>, <span class="hljs-string">&quot;Dinner&quot;</span>);
+        MenuComponent dessertMenu = <span class="hljs-keyword">new</span> Menu(<span class="hljs-string">&quot;DESSERT MENU&quot;</span>, <span class="hljs-string">&quot;Dessert of course!&quot;</span>);
+        <span class="hljs-comment">// 创建顶级root节点——allMenus，代表整个菜单系统</span>
+        MenuComponent allMenus = <span class="hljs-keyword">new</span> Menu(<span class="hljs-string">&quot;ALL MENUS&quot;</span>, <span class="hljs-string">&quot;All menus combined&quot;</span>);
+        allMenus.add(pancakeHouseMenu); <span class="hljs-comment">// 把每个菜单系统，组合到root节点，当做树枝节点</span>
+        allMenus.add(dinerMenu);
+        allMenus.add(cafeMenu);
+        <span class="hljs-comment">// 为煎饼屋的菜单系统，增加菜单项</span>
+        pancakeHouseMenu.add(<span class="hljs-keyword">new</span> MenuItem(
+                <span class="hljs-string">&quot;K&amp;B&#x27;s Pancake Breakfast&quot;</span>,
+                <span class="hljs-string">&quot;Pancakes with scrambled eggs, and toast&quot;</span>,<span class="hljs-keyword">false</span>,<span class="hljs-number">12.5</span>));<span class="hljs-comment">// 为餐厅的菜单系统，增加菜单项</span>
+        dinerMenu.add(<span class="hljs-keyword">new</span> MenuItem(<span class="hljs-string">&quot;Vegetarian BLT&quot;</span>, <span class="hljs-string">&quot;(Fakin&#x27;) Bacon with lettuce &amp; tomato on whole wheat&quot;</span>,<span class="hljs-keyword">true</span>,<span class="hljs-number">15.2</span>));
+        dinerMenu.add(<span class="hljs-keyword">new</span> MenuItem(<span class="hljs-string">&quot;BLT&quot;</span>, <span class="hljs-string">&quot;Bacon with lettuce &amp; tomato on whole wheat&quot;</span>,<span class="hljs-keyword">true</span>,<span class="hljs-number">14.5</span>));
+        <span class="hljs-comment">// 为餐厅的菜单系统，增加子菜单——这个其实也是菜单项，但是，是树枝，这是一个饭后甜点子菜单</span>
+        dinerMenu.add(dessertMenu);
+        <span class="hljs-comment">// 为饭后甜点菜单系统，增加菜单项</span>
+        dessertMenu.add(<span class="hljs-keyword">new</span> MenuItem(<span class="hljs-string">&quot;Apple Pie&quot;</span>, <span class="hljs-string">&quot;Apple pie with a flakey crust, topped with vanilla icecream&quot;</span>,<span class="hljs-keyword">false</span>,<span class="hljs-number">12.7</span>));
+        dessertMenu.add(<span class="hljs-keyword">new</span> MenuItem(<span class="hljs-string">&quot;Cheesecake&quot;</span>, <span class="hljs-string">&quot;Creamy New York cheesecake, with a chocolate graham crust&quot;</span>,<span class="hljs-keyword">false</span>,<span class="hljs-number">14.5</span>));
+        <span class="hljs-comment">// 为咖啡厅菜单系统，增加菜单项</span>
+        cafeMenu.add(<span class="hljs-keyword">new</span> MenuItem(
+                <span class="hljs-string">&quot;Veggie Burger and Air Fries&quot;</span>,
+                <span class="hljs-string">&quot;Veggie burger on a whole wheat bun, lettuce, tomato, and fries&quot;</span>,<span class="hljs-keyword">true</span>,<span class="hljs-number">17.2</span>));
+        <span class="hljs-comment">// 把整个菜单传给客户端</span>
+        Waitress waitress = <span class="hljs-keyword">new</span> Waitress(allMenus);
+        waitress.printMenu();
+    &#125;
+&#125;</code></pre>
+
+<h3 id="单一职责和组合模式的矛盾"><a href="#单一职责和组合模式的矛盾" class="headerlink" title="单一职责和组合模式的矛盾"></a>单一职责和组合模式的矛盾</h3><p>这是一个很典型的折中设计问题：有时候会故意违反一些设计原则，去实现一些特殊需求。还是那句话，学习设计模式不要死记硬背，最后还是要遵循具体的技术条件和 <strong>服务于特定的</strong> 业务场景。</p>
+<p>回顾案例发现：组合模式不但要管理整个菜单——这个树状层次结构，还要执行菜单的一些具体操作动作。明显的，违反了单一职责原则，可以这么说：组合模式牺牲了单一职责的设计原则，换取了程序的透明性（transparency）——通过让组件的接口同时包含一些树枝子节点（组合节点）和叶子子节点的操作，客户就可以将组合节点和叶子节点一视同仁，而一个元素究竟是组合节点还是叶子节点对客户都是透明的。</p>
+<p>如果不让组件接口同时具备多种类型节点的操作，虽然设计上安全，职责也分开，但是失去了透明性，即客户端必须显示的使用条件（一般用 instanceOf ）来判断节点类型</p>
+<h3 id="迭代器模式-组合模式来实现分担部分责任"><a href="#迭代器模式-组合模式来实现分担部分责任" class="headerlink" title="迭代器模式 + 组合模式来实现分担部分责任"></a>迭代器模式 + 组合模式来实现分担部分责任</h3><p>可让客户端使用迭代器模式去遍历整个菜单系统，比方说，女招待可能想要游走整个菜单，只打印 / 挑选素食的菜单项。</p>
+<p>想要实现一个组合模式+迭代器模型的菜单系统，可以为每个组件都加上 createIterator() 方法。</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-21 下午10:04</span>
+<span class="hljs-comment"> * 先从抽象的组件节点入手，加上迭代器</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MenuComponent</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(MenuComponent menuComponent)</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">(MenuComponent menuComponent)</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> MenuComponent <span class="hljs-title">getChild</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getPrice</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isVegetarian</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+
+    <span class="hljs-comment">// 加上迭代器，这里直接使用 JDK 的迭代器</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> Iterator <span class="hljs-title">createIterator</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+&#125;</code></pre>
+
+<p>同样的套路，编写叶子节点和树枝节点，继承这个抽象类</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Menu</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">MenuComponent</span> </span>&#123;
+    <span class="hljs-keyword">private</span> List&lt;MenuComponent&gt; menuComponents = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> String description;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Menu</span><span class="hljs-params">(String name, String description)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.description = description;
+    &#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(MenuComponent menuComponent)</span> </span>&#123;
+        menuComponents.add(menuComponent);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">(MenuComponent menuComponent)</span> </span>&#123;
+        menuComponents.remove(menuComponent);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> MenuComponent <span class="hljs-title">getChild</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> menuComponents.get(i);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> description;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Iterator <span class="hljs-title">createIterator</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> CompositeIterator(menuComponents.iterator());
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> </span>&#123;
+        Iterator iterator = menuComponents.iterator();
+        <span class="hljs-keyword">while</span> (iterator.hasNext()) &#123;
+            MenuComponent menuComponent = (MenuComponent) iterator.next();
+            menuComponent.print();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MenuItem</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">MenuComponent</span> </span>&#123;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> String description;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> vegetarian;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> price;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MenuItem</span><span class="hljs-params">(String name, String description, <span class="hljs-keyword">boolean</span> vegetarian, <span class="hljs-keyword">double</span> price)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.description = description;
+        <span class="hljs-keyword">this</span>.vegetarian = vegetarian;
+        <span class="hljs-keyword">this</span>.price = price;
+    &#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> description;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getPrice</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> price;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isVegetarian</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> vegetarian;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Iterator <span class="hljs-title">createIterator</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> NullIterator();
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.print(<span class="hljs-string">&quot;  &quot;</span> + getName());
+        <span class="hljs-keyword">if</span> (isVegetarian()) &#123;
+            System.out.print(<span class="hljs-string">&quot;(vegetable)&quot;</span>);
+        &#125;
+        System.out.println(<span class="hljs-string">&quot;, &quot;</span> + getPrice());
+        System.out.println(<span class="hljs-string">&quot;     -- &quot;</span> + getDescription());
+    &#125;
+&#125;</code></pre>
+
+<p>发现了两个新东西，一个是 NullIterator() 和 CompositeIterator()，尤其是后者，使用了递归思想。</p>
+<p>回忆：在写 MenuComponent 类的 print 方法时，利用了一个迭代器遍历组件内的每个项，如果遇到的是菜单，就会递归地调度 print 方法处理它，换句话说，MenuComponent 是在“内部”自行处理遍历——内部迭代器模式。</p>
+<p>但是在如下的 CompositeIterator 中，实现的是一个“外部”的迭代器，所以有许多需要追踪的事情。外部迭代器必须维护它在遍历中的位置，以便外部可以通过 hasNext 和 next 来驱动遍历。在 CompositeIterator 中，必须维护组合递归结构的位置，这也是为什么在组合层次结构中上上下下时，使用堆栈 JDK 的 Stack 来维护游标的位置。</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-21 下午10:07</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CompositeIterator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Iterator</span> </span>&#123;
+
+    <span class="hljs-keyword">private</span> Stack&lt;Iterator&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();
+
+    <span class="hljs-comment">// 把要遍历的 Menu 组合的迭代器 iterator 传入，menuComponents.iterator() 被传入一个 stack 中保存位置</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CompositeIterator</span><span class="hljs-params">(Iterator iterator)</span> </span>&#123;
+        stack.push(iterator);
+    &#125;
+
+    <span class="hljs-comment">// 当客户端需要取得下一个元素的时候，先判断是否存在下一个元素</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (hasNext()) &#123;
+            Iterator iterator = stack.peek(); <span class="hljs-comment">// 仅查看当前的栈顶元素——迭代器，不出栈</span>
+            MenuComponent component = (MenuComponent) iterator.next(); <span class="hljs-comment">// 使用该栈顶的迭代器，取出要遍历的组合的元素</span>
+            <span class="hljs-keyword">if</span> (component <span class="hljs-keyword">instanceof</span> Menu) &#123;
+                <span class="hljs-comment">// 如果取出的元素仍然是菜单，那需要继续遍历它，故要记录它的位置，把它的迭代器取出来</span>
+                <span class="hljs-comment">// 调用 component.createIterator() 返回 CompositeIterator，这个 CompositeIterator 仍然包含一个自己的 stack，继续存入栈中</span>
+                stack.push(component.createIterator());
+            &#125;
+
+            <span class="hljs-keyword">return</span> component;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+        &#125;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (stack.empty()) &#123; <span class="hljs-comment">// 如果栈是空，直接返回 false</span>
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            Iterator iterator = stack.peek(); <span class="hljs-comment">// 仅查看当前的栈顶元素——迭代器，不出栈</span>
+            <span class="hljs-comment">// 判断当前的顶层元素是否还有下一个元素，如果栈空了，就说明当前顶层元素没有下一个元素，返回 false，此处判断为 true</span>
+            <span class="hljs-keyword">if</span> (!iterator.hasNext()) &#123;
+                stack.pop(); <span class="hljs-comment">// 如果当前栈顶元素，没有下一个元素了，就把当前栈顶元素出栈，递归的继续判断下一个元素</span>
+                <span class="hljs-keyword">return</span> hasNext();
+            &#125; <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// 否则表示还有下一个元素，直接返回 true</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+            &#125;
+        &#125;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+&#125;</code></pre>
+
+<p>参考 <a target="_blank" rel="noopener" href="http://www.cnblogs.com/jose1125/p/5294972.html">java.util.Stack类中的peek()方法</a></p>
+<p>通过测试，来观察上述代码的执行过程：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestCompositeStack</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        MenuComponent pancakeHouseMenu = <span class="hljs-keyword">new</span> Menu(<span class="hljs-string">&quot;PANCAKE HOUSE MENU&quot;</span>, <span class="hljs-string">&quot;Breakfast&quot;</span>);
+        <span class="hljs-comment">// 创建顶级root节点——allMenus，代表整个菜单系统</span>
+        MenuComponent allMenus = <span class="hljs-keyword">new</span> Menu(<span class="hljs-string">&quot;ALL MENUS&quot;</span>, <span class="hljs-string">&quot;All menus combined&quot;</span>);
+        allMenus.add(pancakeHouseMenu); <span class="hljs-comment">// 把菜单系统，组合到root节点，当做树枝节点</span>
+
+        <span class="hljs-comment">// 为煎饼小屋的菜单系统，增加菜单项</span>
+        pancakeHouseMenu.add(<span class="hljs-keyword">new</span> MenuItem(
+                <span class="hljs-string">&quot;K&amp;B&#x27;s Pancake Breakfast&quot;</span>,
+                <span class="hljs-string">&quot;Pancakes with scrambled eggs, and toast&quot;</span>,<span class="hljs-keyword">false</span>,<span class="hljs-number">12.4</span>));
+        pancakeHouseMenu.add(<span class="hljs-keyword">new</span> MenuItem(
+                <span class="hljs-string">&quot;Regular Pancake Breakfast&quot;</span>,
+                <span class="hljs-string">&quot;Pancakes with fried eggs, sausage&quot;</span>,<span class="hljs-keyword">false</span>,<span class="hljs-number">15</span>));
+        testStack(allMenus);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testStack</span><span class="hljs-params">(MenuComponent menuComponent)</span> </span>&#123;
+        CompositeIterator compositeIterator = <span class="hljs-keyword">new</span> CompositeIterator(menuComponent.createIterator());
+        <span class="hljs-keyword">while</span> (compositeIterator.hasNext()) &#123;
+            MenuComponent menuComponent1 = (MenuComponent) compositeIterator.next();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="空迭代器"><a href="#空迭代器" class="headerlink" title="空迭代器"></a>空迭代器</h3><p>如果菜单项没什么可以遍历的，比如叶子节点，那么一般要给其遍历方法：</p>
+<p>1、返回 null。可以让 createIterator() 方法返回 null，但是如果这么做，客户端的代码就需要条件语句来判断返回值是否为 null，不太好；</p>
+<p>2、返回一个迭代器，而这个迭代器的 hasNext() 永远返回 false。这个是更好的方案，客户端不用再担心返回值是否为 null。等于创建了一个迭代器，其作用是“没作用”。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NullIterator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Iterator</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Waitress</span> </span>&#123;
+    <span class="hljs-keyword">private</span> MenuComponent allMenus;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Waitress</span><span class="hljs-params">(MenuComponent allMenus)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.allMenus = allMenus;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printMenu</span><span class="hljs-params">()</span> </span>&#123;
+        allMenus.print();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printVegetarianMenu</span><span class="hljs-params">()</span> </span>&#123;
+        Iterator iterator = allMenus.createIterator();
+        <span class="hljs-keyword">while</span> (iterator.hasNext()) &#123;
+            MenuComponent menuComponent = (MenuComponent) iterator.next();
+            <span class="hljs-keyword">try</span> &#123;
+                <span class="hljs-keyword">if</span> (menuComponent.isVegetarian()) &#123;
+                    menuComponent.print();
+                &#125;
+            &#125; <span class="hljs-keyword">catch</span> (UnsupportedOperationException ignored) &#123;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<h3 id="组合模式和缓存"><a href="#组合模式和缓存" class="headerlink" title="组合模式和缓存"></a>组合模式和缓存</h3><p>有时候，如果组合的结构非常复杂，或者遍历的代价很大，那么可以为组合节点实现一个缓存，如果业务需求是需要不断的遍历一个组合结构，那么可以把遍历的节点存入缓存，省去每次都递归遍历的开支。</p>
+<h3 id="组合模式的优点"><a href="#组合模式的优点" class="headerlink" title="组合模式的优点"></a>组合模式的优点</h3><p>组合模式包含有个体对象和组合对象，并形成树形结构，使用户可以方便地处理个体对象和组合对象。</p>
+<p>1、组合对象和个体对象实现了相同的接口，用户一般不需区分个体对象和组合对象。</p>
+<p>2、当增加新的Composite节点和Leaf节点时，用户的重要代码不需要作出修改。</p>
+<h3 id="其他案例——文件系统也是典型的树状结构系统"><a href="#其他案例——文件系统也是典型的树状结构系统" class="headerlink" title="其他案例——文件系统也是典型的树状结构系统"></a>其他案例——文件系统也是典型的树状结构系统</h3><p>下面使用接口来基于组合模式，实现简单的文件系统</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@author</span> iMLe0n</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@version</span> 1.0.0</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 19-5-21 下午10:24</span>
+<span class="hljs-comment"> * 文件节点抽象(是文件和目录的父类)</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">IFile</span> </span>&#123;
+    <span class="hljs-comment">//显示文件或者文件夹的名称</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">add</span><span class="hljs-params">(IFile file)</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">remove</span><span class="hljs-params">(IFile file)</span></span>;
+
+    <span class="hljs-comment">//获得子节点</span>
+    <span class="hljs-function">List&lt;IFile&gt; <span class="hljs-title">getChild</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">File</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">IFile</span> </span>&#123;
+    <span class="hljs-keyword">private</span> String name;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">File</span><span class="hljs-params">(String name)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(name);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">add</span><span class="hljs-params">(IFile file)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">remove</span><span class="hljs-params">(IFile file)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;IFile&gt; <span class="hljs-title">getChild</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Folder</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">IFile</span> </span>&#123;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-comment">// 聚合了文件抽象节点</span>
+    <span class="hljs-keyword">private</span> List&lt;IFile&gt; children;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Folder</span><span class="hljs-params">(String name)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+        children = <span class="hljs-keyword">new</span> ArrayList&lt;IFile&gt;();
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(name);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;IFile&gt; <span class="hljs-title">getChild</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> children;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">add</span><span class="hljs-params">(IFile file)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> children.add(file);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">remove</span><span class="hljs-params">(IFile file)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> children.remove(file);
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainClass</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        IFile rootFolder = <span class="hljs-keyword">new</span> Folder(<span class="hljs-string">&quot;/root&quot;</span>);
+        IFile home = <span class="hljs-keyword">new</span> Folder(<span class="hljs-string">&quot;home&quot;</span>);
+        IFile user = <span class="hljs-keyword">new</span> Folder(<span class="hljs-string">&quot;imle0n&quot;</span>);
+        IFile file = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;imle0n.java&quot;</span>);
+        rootFolder.add(home);
+        rootFolder.add(user);
+        rootFolder.add(file);
+
+        IFile aFolder = <span class="hljs-keyword">new</span> Folder(<span class="hljs-string">&quot;aFolder&quot;</span>);
+        IFile aFile = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;aFile.txt&quot;</span>);
+        user.add(aFolder);
+        user.add(aFile);
+
+        displayTree(rootFolder, <span class="hljs-number">0</span>);
+    &#125;
+
+    <span class="hljs-comment">// 层序遍历树</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">displayTree</span><span class="hljs-params">(IFile rootFolder, <span class="hljs-keyword">int</span> deep)</span> </span>&#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; deep; i++) &#123;
+            System.out.print(<span class="hljs-string">&quot;--&quot;</span>);
+        &#125;
+        <span class="hljs-comment">//显示自身的名称</span>
+        rootFolder.display();
+        <span class="hljs-comment">//获得子树</span>
+        List&lt;IFile&gt; children = rootFolder.getChild();
+        <span class="hljs-comment">//遍历子树</span>
+        <span class="hljs-keyword">for</span>(IFile file : children) &#123;
+            <span class="hljs-keyword">if</span>(file <span class="hljs-keyword">instanceof</span> File) &#123;
+                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= deep; i++) &#123;
+                    System.out.print(<span class="hljs-string">&quot;--&quot;</span>);
+                &#125;
+                file.display();
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                displayTree(file, deep + <span class="hljs-number">1</span>);
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p>代码已上传至<a target="_blank" rel="noopener" href="https://github.com/iMLe0n/DesignPatterns/tree/master/src/composite">github</a></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/29/2019-06-20-%E5%A4%A7%E8%95%89ElasticSearch%E5%88%86%E4%BA%AB/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">大蕉ElasticSearch分享</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/29/2019-05-20-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88Iterator%EF%BC%89/">
+                        <span class="hidden-mobile">设计模式之迭代器模式（Iterator）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <!-- <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> -->
+	  <span>Copyright © 2020</span>
+      <!--<i class="iconfont icon-love"></i>-->
+      <!--<a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>-->
+		
+	  <a href="http://www.cltc.club" target="_blank" rel="nofollow noopener"><span>CLTC.CLUB</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">浙ICP备18021007号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "&nbsp;",
+      ],
+      cursorChar: "~",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+  <script>(function (i, s, o, g, r, a, m) {
+      i['DaoVoiceObject'] = r;
+      i[r] = i[r] ||
+        function () {
+          (i[r].q = i[r].q || []).push(arguments);
+        };
+      i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      a.charset = 'utf-8';
+      m.parentNode.insertBefore(a, m);
+    })(window, document, 'script', ('https:' === document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/08ff2aaf.js", 'daovoice');
+    daovoice('init', {
+      app_id: "08ff2aaf",
+    });
+    daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/node_modules/hexo-helper-live2dlib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"node_modules/hexo-helper-live2d","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"jsonPath":"/node_modules/hexo-helper-live2dassets/tororo.model.json"},"log":false});</script></body>
+</html>
