@@ -4,13 +4,19 @@
   
   
   <entry>
-    <title></title>
+    <title>redis数据结构问题整理</title>
     <link href="/2021/11/25/2021-11-25-redis%E6%95%B4%E7%90%86/"/>
     <url>/2021/11/25/2021-11-25-redis%E6%95%B4%E7%90%86/</url>
     
     <content type="html"><![CDATA[<h1 id="redis数据结构问题整理"><a href="#redis数据结构问题整理" class="headerlink" title="redis数据结构问题整理"></a>redis数据结构问题整理</h1><h2 id="redis数据结构"><a href="#redis数据结构" class="headerlink" title="redis数据结构"></a>redis数据结构</h2><p>Redis 为什么这么快, 一方面他是内存数据库,所有的操作都是在内存中操作,另一方面这要归功于它的数据结构。这是因为，键值对是按一定的数据结构来组织的，操作键值对最终就是对数据结构进行增删改查操作，所以高效的数据结构是 Redis 快速处理数据的基础。</p><h3 id="redis数据类型"><a href="#redis数据类型" class="headerlink" title="redis数据类型"></a>redis数据类型</h3><p> <strong>普通玩家:</strong></p><ul><li><p>字符串 String</p></li><li><p>字典Hash</p></li><li><p>列表 List</p></li><li><p>集合 Set</p></li><li><p>有序集合 SortedSet</p><p><strong>中级玩家:</strong> </p></li><li><p>HyperLogLog</p></li><li><p>Geo</p></li><li><p>Bitmap</p><p><strong>高端玩家</strong>: (redis module)</p></li><li><p>BloomFilter</p></li><li><p>RedisSearch</p></li><li><p>Redis-ML</p></li><li><p>JSON</p></li></ul><h3 id="底层数据结构"><a href="#底层数据结构" class="headerlink" title="底层数据结构"></a>底层数据结构</h3><p>​    底层数据结构一共6种,分别是简单动态字符串,双向链表,压缩列表,哈希表,跳表,和整数数组</p><h4 id="redis基本数据类型对应的底层数据结构"><a href="#redis基本数据类型对应的底层数据结构" class="headerlink" title="redis基本数据类型对应的底层数据结构"></a>redis基本数据类型对应的底层数据结构</h4><p>​    **String: ** 简单动态字符串</p><p>​    <strong>List:</strong>  双向链表和压缩列表</p><p>​    <strong>Hash:</strong> 压缩列表和哈希表</p><p>​    <strong>SortedSet:</strong> 压缩列表和跳表</p><p>​    <strong>Set:</strong> 哈希表和整数数组</p><p>​    <img src="/img/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB.jpeg"></p><h3 id="键和值用什么结构组织"><a href="#键和值用什么结构组织" class="headerlink" title="键和值用什么结构组织?"></a>键和值用什么结构组织?</h3><p>​    为了实现从键到值的快速访问, <strong>redis用一个哈希表来保存所有的键值对</strong></p><p>​    一个哈希表其实就是一个数组, 数组的每个元素就是一个哈希桶, 每个哈希桶中保存了键值对数据</p><p><img src="/img/redis%E5%85%A8%E5%B1%80%E5%93%88%E5%B8%8C%E8%A1%A8.jpeg"></p><p>这个哈希表保存了所有的键值对, 所以也被称为全局哈希表, 使用哈希表的好处就是可以使用O(1)的时间复杂度去快速查找键值对, 我们只需要计算键的哈希值就可以找到对应的哈希桶, 然后就可以访问相应的entry元素.</p><h3 id="为什么哈希表操作变慢了-哈希冲突和rehash问题带来的操作阻塞"><a href="#为什么哈希表操作变慢了-哈希冲突和rehash问题带来的操作阻塞" class="headerlink" title="为什么哈希表操作变慢了? ( 哈希冲突和rehash问题带来的操作阻塞)"></a>为什么哈希表操作变慢了? ( 哈希冲突和rehash问题带来的操作阻塞)</h3><p>​    当你往redis中写入大量的数据的时候, 其实就是在哈希表中写入大量的数据, 哈希冲突是不可避免的问题, 哈希冲突就是两个key的哈希值和哈希桶计算对应关系时, 正好落在了同一个哈希桶中. </p><ol><li>Redis 解决哈希冲突的方案就是<strong>链式哈希</strong>, 同一个哈希桶中的多个元素用链表保存,它们之间依次用指针连接.</li></ol><p><img src="/img/redis%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81.png"></p><ol start="2"><li><p><strong>哈希冲突链过长怎么办?  (Redis 会对哈希表进行rehash操作)</strong></p><p>redis 默认使用了两张全局哈希表   哈希表1和哈希表2</p><p>rehash操作步骤:</p><ol><li>给哈希表2扩容, 比如是哈希表1的两倍</li><li>把哈希表1中的数据重新映射并拷贝到哈希表2中</li><li>释放哈希表1中的空间</li></ol><p>第二步涉及大量的数据拷贝, ,如果一次性把哈希表1中的数据迁移到哈希表2中, 会导致redis线程阻塞, 无法服务器他请求, 这个时候就需要redis采用了   <u><strong>渐进式rehash</strong></u></p></li></ol><ol start="3"><li><p><strong>渐进式rehash</strong></p><p>​    redis正常处理请求(查询,增加,删除), 顺带将哈希表1中第一个索引位置下的所有entries拷贝到哈希表2中, 第二次请求时, 拷贝下一个索引位置的entries,  当哈希表1中所有的键值对都已经拷贝完成的时候, 哈希表1置空,变成哈希表2, 为下一次rehash做准备,  哈希表2变成哈希表1.</p></li></ol><p><img src="/img/redis%E6%B8%90%E8%BF%9B%E5%BC%8Frehash.jpeg"></p><p>​            很巧妙的将大量的数据拷贝,分担到每一次请求中, 避免了耗时操作.</p><h3 id="压缩列表和跳表"><a href="#压缩列表和跳表" class="headerlink" title="压缩列表和跳表"></a>压缩列表和跳表</h3><p>压缩列表</p><p><img src="/img/redis%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8.jpeg"></p><p>跳表</p><p><img src="/img/redis%E8%B7%B3%E8%A1%A8.jpeg"></p>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>Redis</tag>
+      
+    </tags>
     
   </entry>
   
