@@ -230,11 +230,11 @@
 <p>那凭什么你大蕉说完成这些述求可以使用 ElasticSearch 呢？我就不信。</p>
 <p>首先，ElasticSearch 在业界已经得到广泛的应用和验证。</p>
 <p>比如极客时间的副产品极客搜索。检索系统就是采用开源的 Elasticsearch，从近实时、可扩展、中文分词、搜准率和同义词等几个角度出发，对聚合结果按规则进行索引构建，并进行了部分同义词调优。</p>
-<p><img src="/img/%E6%9E%81%E5%AE%A2%E6%90%9C%E7%B4%A2.jpg" srcset="/img/loading.gif" alt="极客搜索"></p>
+<p><img src="../img/%E6%9E%81%E5%AE%A2%E6%90%9C%E7%B4%A2.jpg" srcset="/img/loading.gif" alt="极客搜索"></p>
 <p>新浪使用ES 如何分析处理32亿条实时日志，阿里使用 ES 构建挖财自己的日志采集和分析体系，有赞使用ES进行业务日志处理。</p>
 <p>早在2013年初，GitHub就抛弃了Solr，采取ElasticSearch 来做PB级的搜索。而维基百科，早早就启动了以elasticsearch为基础的核心搜索架构。 SoundCloud使用ElasticSearch为1.8亿用户提供即时而精准的音乐搜索服务”。</p>
 <p>说了这么多，你大蕉做了啥？</p>
-<p><img src="/img/%E5%A4%A7%E8%95%89es.jpg" srcset="/img/loading.gif" alt="平安风控反欺诈系统"></p>
+<p><img src="../img/%E5%A4%A7%E8%95%89es.jpg" srcset="/img/loading.gif" alt="平安风控反欺诈系统"></p>
 <p>大蕉毕业后就职于平安，完成了平安普惠大数据几十亿数据的风控反欺诈系统的从0到1的搭建，其中 ElasticSearch 就是作为核心的存储和搜索系统，完成百万用户社交网络的秒级反欺诈风控。</p>
 <p>好，说了这么多，我想用，那我怎么知道怎么用呢？难道把原来的 MySQL全部迁移到所谓的 ElasticSearch 上？这不太可能吧。</p>
 <p>没关系的，这里有两条非常非常好走的路供你走。</p>
@@ -266,8 +266,8 @@
 <p>可以直接当db用,ES 自带备份，负载均衡。如果是搜索的场景，或者匹配的场景，比传统的DB支持性更好，数据安全也有不错的保障。</p>
 <p>5.之前没接触过ES，想问下，对于远程主机文件内容搜索是否可以支持，比如说我有很多云主机，文件都在云主机的log目录下，我想要搜索这些日志文件里的关键字内容，做一个日志查询的功能？</p>
 <p>使用 Logstach，全部同步到 ElasticSearch 就好了，很方便。<br>在每个云主机上，安装一个类似 Agent 的采集器东西，就可以了。比如官方就有一款叫 BEATS <a target="_blank" rel="noopener" href="https://www.elastic.co/cn/products/beats">https://www.elastic.co/cn/products/beats</a></p>
-<p><img src="/img/beats1.jpg" srcset="/img/loading.gif"></p>
-<p><img src="/img/beats2.jpg" srcset="/img/loading.gif"></p>
+<p><img src="../img/beats1.jpg" srcset="/img/loading.gif"></p>
+<p><img src="../img/beats2.jpg" srcset="/img/loading.gif"></p>
 <p>6.利用ES如何设计一套自动化运维系统，做到线上问题实时告警等功能，能否简单讲讲这方面架构层次的东西</p>
 <p>我现在无法回答你，问题我留着，思考完回答你。这是一个比较复杂的问题</p>
 <p>7.日志在不断增加，那每次将日志加载进es是整个文件全量重新导入还是有增量的设计</p>
