@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      1.4k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15
+      14
        分钟
     </span>
   
@@ -274,8 +274,8 @@
 <p>跳表</p>
 <p><img src="/img/redis%E8%B7%B3%E8%A1%A8.jpeg" srcset="/img/loading.gif"></p>
 <h1 id="redis宕机如何避免数据的丢失"><a href="#redis宕机如何避免数据的丢失" class="headerlink" title="redis宕机如何避免数据的丢失"></a>redis宕机如何避免数据的丢失</h1><h3 id="redis持久化两大机制-AOF日志和-RDB快照"><a href="#redis持久化两大机制-AOF日志和-RDB快照" class="headerlink" title="redis持久化两大机制  AOF日志和 RDB快照"></a>redis持久化两大机制  <u><strong>AOF日志和 RDB快照</strong></u></h3><p>​    AOF日志是先执行命令,把数据写入内存,然后再记录日志, 这是因为redis为了避免额外的检查开销,并不会对命令进行语法检查,  如果先记录日志再写执行命令的话,  很有可能记录错误的命令, 使用日志恢复数据的话redis可能会出错,所以**<u>aof日志不会记录错误的命令,</u><strong>而且<u>**不会阻塞当前的写操作</strong></u>  (执行命令后才写日志).</p>
-<p>![](/img/redis aof操作过程.jpeg)</p>
-<p>![](/img/redis aof日志内容.jpeg)</p>
+<p><img src="/img/redis-aof%E6%93%8D%E4%BD%9C%E8%BF%87%E7%A8%8B.jpeg" srcset="/img/loading.gif"></p>
+<p><img src="/img/redis-aof%E6%97%A5%E5%BF%97%E5%86%85%E5%AE%B9.jpeg" srcset="/img/loading.gif"></p>
 <h3 id="AOF日志风险"><a href="#AOF日志风险" class="headerlink" title="AOF日志风险?"></a><strong>AOF日志风险?</strong></h3><ol>
 <li>刚执行完命令,还没来得及记日志就宕机了, 会有数据丢失的风险</li>
 <li>AOF虽然不阻塞当前命令, 但是会给下一个操作带来阻塞风险, 因为aof日志是在主线程中执行的, 日志写入磁盘的时候, 磁盘写压力过大,写入磁盘很慢,  就会阻塞下个操作的执行</li>
@@ -285,11 +285,11 @@
 <li>EverySec 每秒写回 每个命令执行完, 先写入到aof文件的内存缓冲区, 每隔一秒把缓冲区的内容写入磁盘</li>
 <li>No 操作系统控制的写回 每个命令执行完, 先写入到aof文件的内存缓冲区, 有操作系统决定何时将缓冲区内容写入磁盘</li>
 </ul>
-<p>![](/img/redis aof三种同步策略.jpeg)</p>
+<p><img src="/img/redis-aof%E4%B8%89%E7%A7%8D%E5%90%8C%E6%AD%A5%E7%AD%96%E7%95%A5.jpeg" srcset="/img/loading.gif"></p>
 <h3 id="AOF日志文件过大怎么办-aof重写机制"><a href="#AOF日志文件过大怎么办-aof重写机制" class="headerlink" title="AOF日志文件过大怎么办? (aof重写机制)"></a>AOF日志文件过大怎么办? (aof重写机制)</h3><p>AOF重写机制就是创建一个新的aof文件, 读取旧文件的所有键值对, 用一条命令来记录它的写入.</p>
-<p>![](/img/redis aof重写减少大小过程.jpeg)</p>
+<p><img src="/img/redis-aof%E9%87%8D%E5%86%99%E5%87%8F%E5%B0%91%E5%A4%A7%E5%B0%8F%E8%BF%87%E7%A8%8B.jpeg" srcset="/img/loading.gif"></p>
 <h3 id="AOF重写会不会阻塞"><a href="#AOF重写会不会阻塞" class="headerlink" title="AOF重写会不会阻塞?"></a>AOF重写会不会阻塞?</h3><p>每次 AOF 重写时，Redis 会先执行一个内存拷贝，用于重写；然后，使用两个日志保证在重写过程中，新写入的数据不会丢失。而且，因为 Redis 采用额外的线程进行数据重写，所以，这个过程并不会阻塞主线程。</p>
-<p>![](/img/redis aof非阻塞重写过程.jpeg)</p>
+<p><img src="/img/redis-aof%E9%9D%9E%E9%98%BB%E5%A1%9E%E9%87%8D%E5%86%99%E8%BF%87%E7%A8%8B.jpeg" srcset="/img/loading.gif"></p>
 
             </article>
             <hr>
