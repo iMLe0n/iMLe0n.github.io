@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Leon Charles">
   <meta name="keywords" content="">
-  <title>redis数据结构问题整理 - iMLe0n</title>
+  <title>redis问题整理 - iMLe0n</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      899 字
+      1.5k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      15
        分钟
     </span>
   
@@ -204,7 +204,7 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="redis数据结构问题整理"><a href="#redis数据结构问题整理" class="headerlink" title="redis数据结构问题整理"></a>redis数据结构问题整理</h1><h2 id="redis数据结构"><a href="#redis数据结构" class="headerlink" title="redis数据结构"></a>redis数据结构</h2><p>Redis 为什么这么快, 一方面他是内存数据库,所有的操作都是在内存中操作,另一方面这要归功于它的数据结构。这是因为，键值对是按一定的数据结构来组织的，操作键值对最终就是对数据结构进行增删改查操作，所以高效的数据结构是 Redis 快速处理数据的基础。</p>
+              <h1 id="redis数据结构"><a href="#redis数据结构" class="headerlink" title="redis数据结构"></a>redis数据结构</h1><p>Redis 为什么这么快, 一方面他是内存数据库,所有的操作都是在内存中操作,另一方面这要归功于它的数据结构。这是因为，键值对是按一定的数据结构来组织的，操作键值对最终就是对数据结构进行增删改查操作，所以高效的数据结构是 Redis 快速处理数据的基础。</p>
 <h3 id="redis数据类型"><a href="#redis数据类型" class="headerlink" title="redis数据类型"></a>redis数据类型</h3><p> <strong>普通玩家:</strong></p>
 <ul>
 <li><p>字符串 String</p>
@@ -273,6 +273,23 @@
 <p><img src="/img/redis%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8.jpeg" srcset="/img/loading.gif"></p>
 <p>跳表</p>
 <p><img src="/img/redis%E8%B7%B3%E8%A1%A8.jpeg" srcset="/img/loading.gif"></p>
+<h1 id="redis宕机如何避免数据的丢失"><a href="#redis宕机如何避免数据的丢失" class="headerlink" title="redis宕机如何避免数据的丢失"></a>redis宕机如何避免数据的丢失</h1><h3 id="redis持久化两大机制-AOF日志和-RDB快照"><a href="#redis持久化两大机制-AOF日志和-RDB快照" class="headerlink" title="redis持久化两大机制  AOF日志和 RDB快照"></a>redis持久化两大机制  <u><strong>AOF日志和 RDB快照</strong></u></h3><p>​    AOF日志是先执行命令,把数据写入内存,然后再记录日志, 这是因为redis为了避免额外的检查开销,并不会对命令进行语法检查,  如果先记录日志再写执行命令的话,  很有可能记录错误的命令, 使用日志恢复数据的话redis可能会出错,所以**<u>aof日志不会记录错误的命令,</u><strong>而且<u>**不会阻塞当前的写操作</strong></u>  (执行命令后才写日志).</p>
+<p>![](/img/redis aof操作过程.jpeg)</p>
+<p>![](/img/redis aof日志内容.jpeg)</p>
+<h3 id="AOF日志风险"><a href="#AOF日志风险" class="headerlink" title="AOF日志风险?"></a><strong>AOF日志风险?</strong></h3><ol>
+<li>刚执行完命令,还没来得及记日志就宕机了, 会有数据丢失的风险</li>
+<li>AOF虽然不阻塞当前命令, 但是会给下一个操作带来阻塞风险, 因为aof日志是在主线程中执行的, 日志写入磁盘的时候, 磁盘写压力过大,写入磁盘很慢,  就会阻塞下个操作的执行</li>
+</ol>
+<h3 id="三种同步-写回-策略"><a href="#三种同步-写回-策略" class="headerlink" title="三种同步(写回)策略"></a><strong>三种同步(写回)策略</strong></h3><ul>
+<li>Always 同步写回 即每次发生的数据变化都会被立即记录到磁盘中</li>
+<li>EverySec 每秒写回 每个命令执行完, 先写入到aof文件的内存缓冲区, 每隔一秒把缓冲区的内容写入磁盘</li>
+<li>No 操作系统控制的写回 每个命令执行完, 先写入到aof文件的内存缓冲区, 有操作系统决定何时将缓冲区内容写入磁盘</li>
+</ul>
+<p>![](/img/redis aof三种同步策略.jpeg)</p>
+<h3 id="AOF日志文件过大怎么办-aof重写机制"><a href="#AOF日志文件过大怎么办-aof重写机制" class="headerlink" title="AOF日志文件过大怎么办? (aof重写机制)"></a>AOF日志文件过大怎么办? (aof重写机制)</h3><p>AOF重写机制就是创建一个新的aof文件, 读取旧文件的所有键值对, 用一条命令来记录它的写入.</p>
+<p>![](/img/redis aof重写减少大小过程.jpeg)</p>
+<h3 id="AOF重写会不会阻塞"><a href="#AOF重写会不会阻塞" class="headerlink" title="AOF重写会不会阻塞?"></a>AOF重写会不会阻塞?</h3><p>每次 AOF 重写时，Redis 会先执行一个内存拷贝，用于重写；然后，使用两个日志保证在重写过程中，新写入的数据不会丢失。而且，因为 Redis 采用额外的线程进行数据重写，所以，这个过程并不会阻塞主线程。</p>
+<p>![](/img/redis aof非阻塞重写过程.jpeg)</p>
 
             </article>
             <hr>
@@ -449,7 +466,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "redis数据结构问题整理&nbsp;",
+        "redis问题整理&nbsp;",
       ],
       cursorChar: "~",
       typeSpeed: 80,
